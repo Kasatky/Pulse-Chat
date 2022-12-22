@@ -1,0 +1,9 @@
+.chatView{
+height: 80vh;
+width: 80vw;
+background-color: rgb(137, 207, 207);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+}
