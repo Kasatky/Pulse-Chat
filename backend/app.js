@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const app = express();
 const http = require("http");
@@ -11,12 +13,7 @@ app.use(cors());
 
 const server = http.createServer(app);
 
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
-});
+const io = new Server(server);
 
 
 
@@ -62,6 +59,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
-server.listen(3001, () => {
+server.listen(3000, () => {
   console.log("SERVER IS RUNNING");
 });
