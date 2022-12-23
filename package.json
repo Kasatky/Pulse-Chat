@@ -1,0 +1,21 @@
+{
+  "name": "pulse-chat",
+  "version": "1.0.0",
+  "description": "![avatar-1841981409(1)](https://user-images.githubusercontent.com/88902053/209134835-f02969c4-66a6-4807-9d6b-9796a8b668d8.png)\r <h1>Чат на React, NodeJS, Socket</h1>",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd backend && npm i && sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all && cd ../frontend && npm i && DISABLE_ESLINT_PLUGIN=true npm run build",
+    "start": "cd backend && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cksi/pulse-chat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cksi/pulse-chat/issues"
+  },
+  "homepage": "https://github.com/cksi/pulse-chat#readme"
+}

@@ -57,6 +57,11 @@ io.on("connection", async(socket) => {
 
 });
 
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
+
 server.listen(3001, () => {
   console.log("SERVER IS RUNNING");
 });

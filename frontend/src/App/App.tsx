@@ -1,15 +1,15 @@
 import './App.css';
-import AuthPage from '../RegLogView/Authorization';
+// import AuthPage from '../RegLogView/Authorization';
 import Test from '../features/WS-test/test';
-import HomePage from "../features/chat/Home/HomePage";
+// import HomePage from "../features/chat/Home/HomePage";
 
 function App(): JSX.Element {
   return (
     <div className="App">
-      <AuthPage />
+      {/* <AuthPage /> */}
       <Test />
       <header className="App-header">
-        <HomePage />
+        {/* <HomePage /> */}
       </header>
     </div>
   );
