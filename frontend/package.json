@@ -6,6 +6,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.11.1",
+    "@reduxjs/toolkit": "^1.9.1",
     "@mui/system": "latest",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -19,7 +20,9 @@
     "eslint-config-prettier": "^8.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-scripts": "^5.0.1",
+    "socket.io-client": "^4.5.4",
     "typescript": "^4.9.4",
     "web-vitals": "^2.1.4"
   },
@@ -54,7 +57,9 @@
       "react/jsx-one-expression-per-line": 0,
       "jsx-a11y/click-events-have-key-events": 0,
       "default-case": 0,
+      "react/no-array-index-key":0,
       "@typescript-eslint/default-param-last": 0,
+      "@typescript-eslint/consistent-type-definitions": 0,
       "@typescript-eslint/switch-exhaustiveness-check": 2,
       "@typescript-eslint/explicit-function-return-type": [
         2,
@@ -66,10 +71,6 @@
         }
       ],
       "no-await-in-loop": 0,
-      "@typescript-eslint/consistent-type-definitions": [
-        "error",
-        "interface"
-      ],
       "consistent-return": 0,
       "object-curly-newline": 0,
       "@typescript-eslint/no-use-before-define": 0,
