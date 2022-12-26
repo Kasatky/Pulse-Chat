@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../store";
 import { getAllMessages, recieveMessage } from "./MessageSlice";
 import selectAllMessages from "./selectors";
 
-export const socket = io();
+export const socket = io("http://localhost:3001");
 
 function Test(): JSX.Element {
   const messages = useSelector(selectAllMessages);
