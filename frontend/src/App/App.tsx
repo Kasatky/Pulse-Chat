@@ -6,7 +6,7 @@ import Test from "../features/WS-test/test";
 import Auth from "../features/auth/Auth";
 import { useAppDispatch } from "../store";
 import { userCheckThunk } from "../features/auth/authSlice";
-import { selectAuthChecked } from "../features/auth/selectors";
+import { selectIsLoggedIn } from "../features/auth/selectors";
 // import HomePage from "../features/chat/Home/HomePage";
 
 function App(): JSX.Element {
@@ -15,11 +15,10 @@ function App(): JSX.Element {
     dispatch(userCheckThunk());
   }, [dispatch]);
 
-  const authCheckd = useSelector(selectAuthChecked);
+  const authCheckd = useSelector(selectIsLoggedIn);
 
   return (
     <div className="App">
-      {authCheckd && <h1>qwer</h1>}
       {/* <AuthPage /> */}
       {authCheckd ? <h1>Hello!</h1> : <Auth />}
       <Test />

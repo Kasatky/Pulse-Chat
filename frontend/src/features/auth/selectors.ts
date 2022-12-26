@@ -7,5 +7,5 @@ export const errorSelector = (state: RootState): string | undefined =>
 export const userSelector = (state: RootState): User | undefined =>
   state.auth.currentUser;
 
-export const selectAuthChecked = (state: RootState): boolean =>
-  state.auth.authChecked;
+export const selectIsLoggedIn = (state: RootState): boolean =>
+  state.auth.isLoggedIn;
