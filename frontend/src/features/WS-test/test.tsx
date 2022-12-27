@@ -6,18 +6,19 @@ import { useAppDispatch } from "../../store";
 import { getAllMessages, recieveMessage } from "./MessageSlice";
 import selectAllMessages from "./selectors";
 
-export const socket = io("http://localhost:3001");
-
 function Test(): JSX.Element {
   const messages = useSelector(selectAllMessages);
   const dispatch = useAppDispatch();
-  const [username, setUsername] = useState("");
   const [text, setText] = useState("");
+
 
   const sendMessage = (event: React.FormEvent): void => {
     event.preventDefault();
-    socket.emit("/messages/send", JSON.stringify({ username, text }));
+    socket.emit("/messages/send", JSON.stringify({ text }));
   };
+
+  
+  const socket = io("http://localhost:4000");
 
   useEffect(() => {
     socket.on("/messages", (data) => {
@@ -31,23 +32,12 @@ function Test(): JSX.Element {
       socket.disconnect();
       socket.emit("/messages/disconnect");
     };
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="App">
       <form onSubmit={sendMessage}>
         <Box sx={{ margin: "1vw", padding: 1 }}>
-          <TextField
-            sx={{ margin: 1 }}
-            value={username}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setUsername(event.target.value);
-            }}
-            name="username"
-            label="Username"
-            variant="outlined"
-          />
-
           <TextField
             sx={{ margin: 1 }}
             value={text}

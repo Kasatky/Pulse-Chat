@@ -1,25 +1,38 @@
 require("dotenv").config();
 
 const express = require("express");
+
 const app = express();
+
 const http = require("http");
-const { Server } = require("socket.io");
+
+const io = require("socket.io");
+
 const cors = require("cors");
+
 const expressConfig = require("./config/express");
+
 const { Message } = require("./db/models");
-expressConfig(app);
+
+const authRouter = require("./routes/AuthRouter");
 
 const server = http.createServer(app);
 
-const io = new Server(server, {
+const ioSocket = io(server, {
   cors: {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"],
   },
 });
 
-io.on("connection", async (socket) => {
-  console.log(`User Connected: ${socket.id}`);
+expressConfig(app, ioSocket);
+
+app.use("/api/auth", authRouter);
+
+ioSocket.on("connection", async (socket) => {
+  // console.log(`User Connected: ${socket.id}`);
+
+  // console.log(socket.user);
 
   const messages = await Message.findAll({
     limit: 8,
@@ -31,13 +44,15 @@ io.on("connection", async (socket) => {
   socket.on("/messages/send", async (data) => {
     const messageInfo = JSON.parse(data);
 
-    console.log(messageInfo);
+    const session = socket.handshake.session;
+
+    // console.log(session);
 
     const message = await Message.create(messageInfo);
 
-    io.sockets.emit("/messages/recieve", message);
+    ioSocket.sockets.emit("/messages/recieve", message);
 
-    io.sockets.on("/messages/disconnect", () => {
+    ioSocket.sockets.on("/messages/disconnect", () => {
       console.log("user disconnected");
 
       socket.disconnect();
@@ -49,16 +64,16 @@ io.on("connection", async (socket) => {
   });
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+// });
 
 const { PORT } = process.env;
 
-// app.listen(3001, () => {
-//   console.log("EXPRESS SERVER IS RUNNING");
-// });
-
-server.listen(3001, () => {
-  console.log(`SOCKET SERVER IS RUNNING`);
+server.listen(PORT, () => {
+  console.log("EXPRESS AND SOCKET SERVERS ARE RUNNING");
 });
+
+// server.listen(3001, () => {
+//   console.log(`SOCKET SERVER IS RUNNING`);
+// });

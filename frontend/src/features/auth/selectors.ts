@@ -9,3 +9,6 @@ export const userSelector = (state: RootState): User | undefined =>
 
 export const selectIsLoggedIn = (state: RootState): boolean =>
   state.auth.isLoggedIn;
+
+export const selectName = (state: RootState): string | undefined =>
+  state.auth.currentUser?.name;
