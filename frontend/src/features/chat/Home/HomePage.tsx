@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button, Container, TextField } from '@mui/material';
 import { useAppDispatch } from '../../../store';
 import { getAllMessages, recieveMessage } from '../MessageSlice';
 import selectAllMessages from '../selectors';
+import MessageView from '../MessageView/MessageView';
 
 function HomePage(): JSX.Element {
   const socket = io('http://localhost:4000', { withCredentials: true });
@@ -54,25 +55,19 @@ function HomePage(): JSX.Element {
           </Button>
         </Box>
       </form>
-      {messages.map((message, index) => (
-        <Box
-          sx={{
-            maxWidth: '40vw',
-            margin: 'auto',
-            borderRadius: 5,
-            backgroundColor: 'primary.dark',
-            '&:hover': {
-              backgroundColor: 'primary.main',
-              opacity: [0.9, 0.8, 0.7],
-            },
-          }}
-        >
-          <div key={`${index}`}>
-            <h1>From:{message.username}</h1>
-            <p>{message.text}</p>
-          </div>
-        </Box>
-      ))}
+      <Container
+        sx={{
+          width: '50vw',
+          display: 'flex',
+          ml: 'auto',
+          mr: 'auto',
+          flexDirection: 'column',
+        }}
+      >
+        {messages.map((message) => (
+          <MessageView message={message} />
+        ))}
+      </Container>
     </div>
   );
 }
