@@ -9,21 +9,21 @@ import store from './store';
 const mainTheme = createTheme({
   palette: {
     primary: {
-      main: '#2e7d32',
+      main: '#43388b',
       light: '#000000',
     },
     secondary: {
-      main: '#7d2e79',
+      main: '#2e2575',
     },
     error: {
-      main: '#c62828',
+      main: '#b71c1c',
     },
     warning: {
-      main: '#fbc02d',
+      main: '#ffd740',
     },
     divider: '#edf5e1',
     background: {
-      default: '#efecf5',
+      default: '#f7f7f7',
     },
     text: {
       primary: '#000000',

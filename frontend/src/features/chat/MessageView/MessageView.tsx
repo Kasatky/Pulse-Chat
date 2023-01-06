@@ -27,15 +27,11 @@ function MessageView({ message }: MessageViewProps): JSX.Element {
     <Card
       sx={{
         width: 'fit-content',
-        minWidth: '5vw',
-        maxWidth: '100%',
-        minHeight: '5vh',
-        maxHeight: 'fit-content',
-
+        minWidth: 40,
+        minHeight: 30,
         mb: 2,
         borderRadius: 5,
         ...styleForUserMessage,
-        // backgroundColor: '#323232',
         padding: 1,
       }}
       elevation={2}
@@ -46,7 +42,7 @@ function MessageView({ message }: MessageViewProps): JSX.Element {
         variant="subtitle2"
         sx={{
           color: 'white',
-          fontSize: '1.5vh',
+          fontSize: 14,
           wordBreak: 'break-all',
         }}
       >
@@ -59,7 +55,7 @@ function MessageView({ message }: MessageViewProps): JSX.Element {
         variant="subtitle2"
         sx={{
           color: 'white',
-          fontSize: '1.5vh',
+          fontSize: 14,
           wordBreak: 'break-all',
         }}
       >

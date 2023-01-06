@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
-import { Box, Button, Container, TextField } from '@mui/material';
+import { Container, TextField } from '@mui/material';
 import { useAppDispatch } from '../../../store';
 import { getAllMessages, recieveMessage } from '../MessageSlice';
 import selectAllMessages from '../selectors';
@@ -36,39 +36,30 @@ function HomePage(): JSX.Element {
   }, []);
 
   return (
-    <div className="App">
-      <form onSubmit={sendMessage}>
-        <Box sx={{ margin: '1vw', padding: 1 }}>
-          <TextField
-            sx={{ margin: 1 }}
-            value={text}
-            placeholder="text"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setText(event.target.value);
-            }}
-            name="text"
-            label="Your message"
-            variant="outlined"
-          />
-          <Button type="submit" sx={{ marginTop: 2 }} variant="contained">
-            Send
-          </Button>
-        </Box>
-      </form>
+    <form onSubmit={sendMessage}>
       <Container
         sx={{
-          width: '50vw',
-          display: 'flex',
-          ml: 'auto',
-          mr: 'auto',
-          flexDirection: 'column',
+          mt: '1vh',
+          overflow: 'auto',
         }}
       >
         {messages.map((message) => (
           <MessageView message={message} />
         ))}
+        <TextField
+          sx={{ margin: 1 }}
+          value={text}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setText(event.target.value);
+          }}
+          name="text"
+          variant="standard"
+        />
+        {/* <Button type="submit" sx={{ marginTop: 2 }} variant="contained">
+          Send
+        </Button> */}
       </Container>
-    </div>
+    </form>
   );
 }
 
