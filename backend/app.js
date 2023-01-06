@@ -1,6 +1,14 @@
 require("dotenv").config();
 
+const { PORT, SESSIONS_SECRET  } = process.env;
+
 const express = require("express");
+
+const cookie = require('cookie');
+
+const sessionConfig = require('./config/sessionConfig')
+
+const cookieParser = require('cookie-parser')
 
 const app = express();
 
@@ -8,11 +16,10 @@ const http = require("http");
 
 const io = require("socket.io");
 
-const cors = require("cors");
 
 const expressConfig = require("./config/express");
 
-const { Message } = require("./db/models");
+const { Message, User } = require("./db/models");
 
 const authRouter = require("./routes/AuthRouter");
 
@@ -22,6 +29,7 @@ const ioSocket = io(server, {
   cors: {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"],
+    credentials:true
   },
 });
 
@@ -29,10 +37,9 @@ expressConfig(app, ioSocket);
 
 app.use("/api/auth", authRouter);
 
-ioSocket.on("connection", async (socket) => {
-  // console.log(`User Connected: ${socket.id}`);
 
-  // console.log(socket.user);
+ioSocket.on("connection", async (socket) => {
+
 
   const messages = await Message.findAll({
     limit: 8,
@@ -41,39 +48,45 @@ ioSocket.on("connection", async (socket) => {
 
   socket.emit("/messages", messages);
 
+
+  const idCookie = cookie.parse(socket.handshake.headers.cookie)
+  
+  const sessionKey = cookieParser.signedCookie(idCookie.user_sid, SESSIONS_SECRET);
+
+  const id = await new Promise((resolve, reject)=>{
+    
+    sessionConfig.store.get(sessionKey, (err, session) => {
+      if (err) reject(err);
+      const { userId} = session;
+      resolve(userId)
+    })
+
+  })
+  
+  socket.userId = id;
+  socket.user = await User.findByPk(socket.userId);
+
   socket.on("/messages/send", async (data) => {
-    const messageInfo = JSON.parse(data);
 
-    const session = socket.handshake.session;
+    const {text} = JSON.parse(data);
 
-    // console.log(session);
-
-    const message = await Message.create(messageInfo);
+    const message = await Message.create({text,username:socket.user.name});
 
     ioSocket.sockets.emit("/messages/recieve", message);
 
     ioSocket.sockets.on("/messages/disconnect", () => {
-      console.log("user disconnected");
-
       socket.disconnect();
 
       socket._cleanup();
     });
 
-    console.log(`Message ${data} sended`);
-  });
-});
+    console.log(`Message ${text} sended`);
+  });}
+);
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-// });
 
-const { PORT } = process.env;
 
 server.listen(PORT, () => {
   console.log("EXPRESS AND SOCKET SERVERS ARE RUNNING");
 });
 
-// server.listen(3001, () => {
-//   console.log(`SOCKET SERVER IS RUNNING`);
-// });
