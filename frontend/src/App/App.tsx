@@ -3,11 +3,12 @@ import './App.css';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
-import HomePage from '../features/chat/Home/HomePage';
+// import HomePage from '../features/chat/Home/HomePage';
 import Auth from '../features/auth/Auth';
 import { useAppDispatch } from '../store';
 import { logoutThunk, userCheckThunk } from '../features/auth/authSlice';
 import { selectIsLoggedIn, selectName } from '../features/auth/selectors';
+import Sidebar from '../features/chat/Sidebar/Sidebar';
 // import HomePage from "../features/chat/Home/HomePage";
 
 function App(): JSX.Element {
@@ -37,12 +38,13 @@ function App(): JSX.Element {
           >
             Logout...
           </Button>
-          <HomePage />
+          {/* <HomePage /> */}
+          <Sidebar/>
         </>
       ) : (
         <Auth />
       )}
-      <header className="App-header">{/* <HomePage /> */}</header>
+      {/* <header className="App-header"><HomePage /></header> */}
     </div>
   );
 }
