@@ -1,9 +1,10 @@
-import User from "./User";
+import User from './User';
 
 type AuthState = {
   currentUser: User | undefined;
   error?: string;
-  isLoggedIn:boolean;
+  isLoggedIn: boolean;
+  loading: boolean;
 };
 
 export default AuthState;
