@@ -58,9 +58,9 @@ function HomePage(): JSX.Element {
           {" "}
           {messages.map((message) =>
             user?.name === message.username ? (
-              <CompanionMessageView message={message} />
-            ) : (
               <UserMessageView message={message} />
+              ) : (
+              <CompanionMessageView message={message} />
             )
           )}{" "}
         </div>

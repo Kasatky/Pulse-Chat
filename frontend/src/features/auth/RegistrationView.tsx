@@ -5,23 +5,22 @@ import {
   Container,
   CssBaseline,
   Grid,
-  Link,
   TextField,
   Typography,
-} from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import React, { useCallback, useState } from 'react';
-import { useAppDispatch } from '../../store';
-import { registrationThunk } from './authSlice';
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import React, { useCallback, useState } from "react";
+import { useAppDispatch } from "../../store";
+import { registrationThunk } from "./authSlice";
 
 export default function LoginView(): JSX.Element {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
 
-  const [passwordRepeat, setRepeatPassword] = useState('');
+  const [passwordRepeat, setRepeatPassword] = useState("");
 
   const dispatch = useAppDispatch();
 
@@ -56,7 +55,7 @@ export default function LoginView(): JSX.Element {
   const handleLogin = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     if (password !== passwordRepeat) {
-      alert('Passwords don`t match');
+      alert("Passwords don`t match");
     } else {
       dispatch(registrationThunk({ email, name, password, passwordRepeat }));
     }
@@ -69,12 +68,12 @@ export default function LoginView(): JSX.Element {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

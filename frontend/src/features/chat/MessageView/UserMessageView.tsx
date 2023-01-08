@@ -15,11 +15,11 @@ function UserMessageView({ message }: MessageViewProps): JSX.Element {
         minHeight: 30,
         mb: 2,
         mr: 1,
-        borderBottomRightRadius: 0,
-        float: "left",
+        float: "right",
         backgroundColor: "primary.main",
         clear: "both",
         borderRadius: 5,
+        borderBottomRightRadius: 0,
         padding: 1,
       }}
       elevation={2}

@@ -15,11 +15,11 @@ function CompanionMessageView({ message }: MessageViewProps): JSX.Element {
         minHeight: 30,
         mb: 2,
         mr: 1,
-        borderBottomLeftRadius: 0,
-        float: "right",
-        backgroundColor: "secondary.main",
+        float: "left",
         clear: "both",
+        backgroundColor: "secondary.main",
         borderRadius: 5,
+        borderBottomLeftRadius: 0,
         padding: 1,
       }}
       elevation={2}
