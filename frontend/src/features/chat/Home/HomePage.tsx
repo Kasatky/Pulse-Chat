@@ -20,7 +20,8 @@ function HomePage(): JSX.Element {
 
   const sendMessage = (event: React.FormEvent): void => {
     event.preventDefault();
-    socket.emit("/messages/send", JSON.stringify({ text }));
+    socket.emit('/messages/send', JSON.stringify({ text }));
+    setText('');
   };
 
   useEffect(() => {
