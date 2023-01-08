@@ -7,10 +7,10 @@
   }
 }
 
-*{
-  box-sizing:border-box;
+* {
+  box-sizing: border-box;
 }
 
-.main{
-background-color: #e5e7e9;
+.main {
+  background-color: white;
 }

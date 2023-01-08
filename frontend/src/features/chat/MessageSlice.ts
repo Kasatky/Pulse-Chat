@@ -17,7 +17,7 @@ const MessagesSlice = createSlice({
 
     recieveMessage: (state, action: PayloadAction<Message>) => {
       if (state.messages.length >= 8) {
-        state.messages.shift();
+        // state.messages.shift();
         state.messages.push(action.payload);
       }
     },

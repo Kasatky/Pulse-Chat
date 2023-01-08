@@ -1,0 +1,26 @@
+.rightSide {
+  /* display: flex;
+    flex-direction :column; */
+  position: relative;
+  /* left: 50px */
+  height: 700px;
+  width: 100%;
+  overflow-y: auto;
+  /* display: flex; */
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.sendWrap {
+  display: flex;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+.sendWrap__input {
+  flex-grow: 1;
+}
+
+.sendWrap__btn {
+  flex-shrink: 0;
+}
