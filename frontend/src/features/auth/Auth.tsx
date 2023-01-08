@@ -1,30 +1,32 @@
-import { Box, Button } from "@mui/material";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import LoginView from "./LoginView";
-import RegistrationView from "./RegistrationView";
-import { errorSelector } from "./selectors";
+import { Container, Grid, Link } from '@mui/material';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import LoginView from './LoginView';
+import RegistrationView from './RegistrationView';
+import { errorSelector } from './selectors';
 
 function Auth(): JSX.Element {
   const error = useSelector(errorSelector);
-  const [showForm, setShowForm] = useState(true);
-
-  const handleFormChange = (): void => {
-    setShowForm((prev) => !prev);
-  };
-
+  const [viewLogin, setViewLogin] = useState(true);
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", mt: 1 }}>
+    <Container component="main" maxWidth="xs">
       {error && <h1>{error}</h1>}
-      {showForm ? <LoginView /> : <RegistrationView />}
-      <Button
-        sx={{ mt: 1, ml: 1 }}
-        onClick={handleFormChange}
-        variant="contained"
-      >
-        {showForm ? "Registration..." : "Login..."}
-      </Button>
-    </Box>
+      {viewLogin ? <LoginView /> : <RegistrationView />}
+      <Grid container justifyContent="center">
+        <Grid item>
+          <Link
+            onClick={() => {
+              setViewLogin((prev) => !prev);
+            }}
+            variant="body2"
+          >
+            {viewLogin
+              ? 'Don`t have an account? Sign Up'
+              : 'Already have an account? Sign in'}
+          </Link>
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 

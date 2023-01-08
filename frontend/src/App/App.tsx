@@ -2,8 +2,9 @@ import './App.css';
 // import AuthPage from '../RegLogView/Authorization';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Box } from '@mui/material';
+
 // import HomePage from '../features/chat/Home/HomePage';
+import { Box } from '@mui/system';
 import Auth from '../features/auth/Auth';
 import { useAppDispatch } from '../store';
 import { userCheckThunk } from '../features/auth/authSlice';
@@ -24,9 +25,9 @@ function App(): JSX.Element {
     <Box
       className="main"
       sx={{
+        hegiht: '100%',
         display: 'flex',
         margin: '7vh 10vw',
-        height: '100%',
         borderRadius: 8,
         overflow: 'hidden',
       }}
@@ -35,7 +36,6 @@ function App(): JSX.Element {
       {authCheckd ? (
         <>
           <Sidebar />
-
           <HomePage />
         </>
       ) : (
