@@ -1,32 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import { Provider } from 'react-redux';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import App from './App/App';
-import store from './store';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { Provider } from "react-redux";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import App from "./App/App";
+import store from "./store";
 
 const mainTheme = createTheme({
   palette: {
     primary: {
-      main: '#43388b',
-      light: '#000000',
+      main: "#43388b",
+      light: "#000000",
     },
     secondary: {
-      main: '#2e2575',
+      main: "#2e2575",
     },
     error: {
-      main: '#b71c1c',
+      main: "#b71c1c",
     },
     warning: {
-      main: '#ffd740',
+      main: "#ffd740",
     },
-    divider: '#edf5e1',
+    divider: "#edf5e1",
     background: {
-      default: '#f7f7f7',
+      default: "#f7f7f7",
     },
     text: {
-      primary: '#000000',
+      primary: "#000000",
     },
   },
   typography: {
@@ -37,13 +37,13 @@ const mainTheme = createTheme({
     fontWeightBold: 700,
     htmlFontSize: 16,
     body1: {
-      fontSize: '1.2rem',
+      fontSize: "1.2rem",
     },
   },
 });
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <Provider store={store}>
