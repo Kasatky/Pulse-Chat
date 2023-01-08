@@ -1,5 +1,4 @@
 import React from 'react';
-import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { Provider } from 'react-redux';
@@ -55,10 +54,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <ScopedCssBaseline>
-      <ThemeProvider theme={mainTheme}>
-        <App />
-      </ThemeProvider>
-    </ScopedCssBaseline>
+    <ThemeProvider theme={mainTheme}>
+      <App />
+    </ThemeProvider>
   </Provider>
 );
