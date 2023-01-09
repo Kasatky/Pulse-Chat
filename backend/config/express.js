@@ -13,13 +13,13 @@ const wrap = expressMiddleware => (socket, next) =>
 function expressConfig(app, io) {
   app.use(sessionMiddleware);
 
-  // io.use(
-  //   sharedsession(sessionMiddleware, {
-  //     autoSave: true,
-  //   })
-  // );
+  io.use(
+    sharedsession(sessionMiddleware, {
+      autoSave: true,
+    })
+  );
 
-  io.use(wrap(sessionMiddleware))
+  // io.use(wrap(sessionMiddleware))
 
   app.use(getUser);
 

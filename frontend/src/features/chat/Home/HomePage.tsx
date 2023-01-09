@@ -1,49 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import io from 'socket.io-client';
+import React, { useMemo } from 'react';
 import { Box, Button, Container, TextField } from '@mui/material';
-import { useAppDispatch } from '../../../store';
-import { getAllMessages, recieveMessage } from '../MessageSlice';
-import selectAllMessages, { selectCurrentUser } from '../selectors';
+import { io, Socket } from 'socket.io-client';
 import CompanionMessageView from '../MessageView/CompanionMessageView';
 import './HomePage.css';
 import UserMessageView from '../MessageView/UserMessageView';
+import useSocket from '../Hooks/useSocket';
 
 function HomePage(): JSX.Element {
-  const socket = io('http://localhost:4000', { withCredentials: true });
-  const user = useSelector(selectCurrentUser);
-  const messages = useSelector(selectAllMessages);
+  const socket: Socket = useMemo(
+    () => io('http://localhost:4000', { withCredentials: true }),
+    []
+  );
 
-  const dispatch = useAppDispatch();
-
-  const [text, setText] = useState('');
-
-  const sendMessage = (event: React.FormEvent): void => {
-    event.preventDefault();
-    socket.emit('/messages/send', JSON.stringify({ text }));
-    setText('');
-  };
-
-  useEffect(() => {
-    const dd = document.querySelector('.messages');
-    if (dd) {
-      dd.scrollTo(0, dd.scrollHeight);
-    }
-  }, [messages]);
-
-  useEffect(() => {
-    socket.on('/messages', (data) => {
-      dispatch(getAllMessages(data));
-    });
-
-    socket.on('/messages/recieve', (data) => {
-      dispatch(recieveMessage(data));
-    });
-    return () => {
-      socket.disconnect();
-      socket.emit('/messages/disconnect');
-    };
-  }, []);
+  const { user, messages, sendMessage, text, setText } = useSocket(socket);
 
   return (
     <form onSubmit={sendMessage}>
@@ -68,14 +37,13 @@ function HomePage(): JSX.Element {
             },
           }}
         >
-          {' '}
           {messages.map((message) =>
             user?.name === message.username ? (
               <UserMessageView message={message} />
             ) : (
               <CompanionMessageView message={message} />
             )
-          )}{' '}
+          )}
         </Box>
 
         <div className="sendWrap">
