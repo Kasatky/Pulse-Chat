@@ -6,6 +6,7 @@ import { logoutThunk } from '../../auth/authSlice';
 import SearchView from './SearchView';
 import Group from './Group&Direct';
 import { useAppDispatch } from '../../../store';
+import ModalUserWindow from '../ModalUserWindow/ModalUserWindow';
 
 function Sidebar(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -63,6 +64,7 @@ function Sidebar(): JSX.Element {
           </Box>
         </>
       </Box>
+      <ModalUserWindow/>
       <Button
         sx={{
           width: '100%',
