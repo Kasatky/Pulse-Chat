@@ -8,7 +8,7 @@ import useSocket from '../Hooks/useSocket';
 
 function HomePage(): JSX.Element {
   const socket: Socket = useMemo(
-    () => io('http://localhost:4000', { withCredentials: true }),
+    () => io(window.location.origin, { withCredentials: true }),
     []
   );
 
