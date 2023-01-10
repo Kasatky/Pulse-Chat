@@ -40,7 +40,7 @@ const mainTheme = createTheme({
       fontSize: '1.2rem',
     },
     fontFamily: [
-      'Poppins',
+      'Mada',
       'sans-serif',
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
