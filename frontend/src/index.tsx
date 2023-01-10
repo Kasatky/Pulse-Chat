@@ -39,8 +39,15 @@ const mainTheme = createTheme({
     body1: {
       fontSize: '1.2rem',
     },
-    fontFamily: ['Poppins', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"'].join(','),
-  },
+
+    fontFamily: [
+      'Mada',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+
   breakpoints: {
     values: {
       xs: 0, // phone
@@ -49,6 +56,7 @@ const mainTheme = createTheme({
       lg: 900, // desktop
       xl: 1536, // large screens
     },
+
   },
 });
 
