@@ -8,24 +8,23 @@ import useSocket from "../Hooks/useSocket";
 
 
 function HomePage(): JSX.Element {
-  const socket: Socket = useMemo(
-    () => io(window.location.origin, { withCredentials: true }),
-    []
-  );
+  const socket: Socket = useMemo(() => io(window.location.origin, { withCredentials: true }), []);
 
   const { user, messages, sendMessage, text, setText } = useSocket(socket);
 
   return (
-    <form onSubmit={sendMessage}>
-      <Container
-        sx={{
-          mt: "1vh",
-          position: "relative",
-          width: "70em",
-        }}
-      >
+
+    <Container
+      sx={{
+        mt: '1vh',
+        position: 'relative',
+        width: '70%',
+      }}
+    >
+      <form onSubmit={sendMessage}>
+
         <Box
-          className="messages"
+          className='messages'
           sx={{
             position: "relative",
             height: "700px",
@@ -39,13 +38,10 @@ function HomePage(): JSX.Element {
           }}
         >
           {messages.map((message) =>
-            user?.name === message.username ? (
-              <UserMessageView message={message} />
-            ) : (
-              <CompanionMessageView message={message} />
-            )
+            user?.name === message.username ? <UserMessageView message={message} /> : <CompanionMessageView message={message} />
           )}
         </Box>
+
         <div className="mainInput">
           <div className="sendWrap">
             <TextField
@@ -64,8 +60,8 @@ function HomePage(): JSX.Element {
             </Button>
           </div>
         </div>
-      </Container>
-    </form>
+      </form>
+    </Container>
   );
 }
 

@@ -8,7 +8,8 @@ function Group({ item }: GroupProps): JSX.Element {
   return (
     <Box
       sx={{
-        display: 'flex',
+        width: '100%',
+
         justifyContent: 'flex-start',
         alignItems: 'center',
       }}
@@ -20,7 +21,19 @@ function Group({ item }: GroupProps): JSX.Element {
       >
         {item[0]}
       </Avatar>{' '}
-      <div>{item}</div>
+      <Box
+        sx={{
+          display: {
+            xs: 'none',
+            sm: 'null',
+            md: 'flex',
+            lg: 'flex',
+            xl: 'flex',
+          },
+        }}
+      >
+        {item}
+      </Box>
     </Box>
   );
 }
