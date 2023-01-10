@@ -15,10 +15,10 @@ function Sidebar(): JSX.Element {
   const groups = ['Billionares club', 'Bates'];
   const directs = ['Steve Jobs', 'Bill Gates'];
   return (
-    <Box sx={{ backgroundColor: '#43388B', height: '100' }}>
+    <Box sx={{ backgroundColor: '#43388B', width: '30%' }}>
       <Box
         sx={{
-          width: 400,
+          width: '100%',
           color: 'white',
           opacity: 0.8,
           mb: '40vh',
@@ -26,12 +26,12 @@ function Sidebar(): JSX.Element {
       >
         <SearchView />
         <>
-          <Typography align="left" sx={{ ml: '1vw' }}>
+          <Typography align='left' sx={{ ml: '1vw' }}>
             GROUPS
           </Typography>
           <Box
             sx={{
-              width: 400,
+              width: '100%',
               height: 130,
               display: 'flex',
               flexDirection: 'column',
@@ -45,13 +45,13 @@ function Sidebar(): JSX.Element {
         </>
 
         <>
-          <Typography align="left" sx={{ ml: '1vw', mb: '3vh' }}>
+          <Typography align='left' sx={{ ml: '1vw', mb: '3vh' }}>
             DIRECT
           </Typography>
 
           <Box
             sx={{
-              width: 300,
+              width: '100%',
               height: 30,
               display: 'flex',
               flexDirection: 'column',
@@ -70,7 +70,7 @@ function Sidebar(): JSX.Element {
         }}
         disableElevation
         onClick={handleLogout}
-        variant="contained"
+        variant='contained'
       >
         Logout...
       </Button>
