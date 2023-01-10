@@ -47,7 +47,7 @@ const mainTheme = createTheme({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join(','),
-
+  },
   breakpoints: {
     values: {
       xs: 0, // phone
