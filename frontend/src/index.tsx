@@ -39,19 +39,20 @@ const mainTheme = createTheme({
     body1: {
       fontSize: '1.2rem',
     },
-    fontFamily: [
-      'Poppins',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
+    fontFamily: ['Poppins', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"'].join(','),
+  },
+  breakpoints: {
+    values: {
+      xs: 0, // phone
+      sm: 300, // tablets
+      md: 600, // small laptop
+      lg: 900, // desktop
+      xl: 1536, // large screens
+    },
   },
 });
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <Provider store={store}>
     <ThemeProvider theme={mainTheme}>

@@ -7,24 +7,21 @@ import UserMessageView from '../MessageView/UserMessageView';
 import useSocket from '../Hooks/useSocket';
 
 function HomePage(): JSX.Element {
-  const socket: Socket = useMemo(
-    () => io(window.location.origin, { withCredentials: true }),
-    []
-  );
+  const socket: Socket = useMemo(() => io(window.location.origin, { withCredentials: true }), []);
 
   const { user, messages, sendMessage, text, setText } = useSocket(socket);
 
   return (
-    <form onSubmit={sendMessage}>
-      <Container
-        sx={{
-          mt: '1vh',
-          position: 'relative',
-          width: '70em',
-        }}
-      >
+    <Container
+      sx={{
+        mt: '1vh',
+        position: 'relative',
+        width: '70%',
+      }}
+    >
+      <form onSubmit={sendMessage}>
         <Box
-          className="messages"
+          className='messages'
           sx={{
             position: 'relative',
             height: '700px',
@@ -38,31 +35,27 @@ function HomePage(): JSX.Element {
           }}
         >
           {messages.map((message) =>
-            user?.name === message.username ? (
-              <UserMessageView message={message} />
-            ) : (
-              <CompanionMessageView message={message} />
-            )
+            user?.name === message.username ? <UserMessageView message={message} /> : <CompanionMessageView message={message} />
           )}
         </Box>
 
-        <div className="sendWrap">
+        <div className='sendWrap'>
           <TextField
             sx={{ margin: 1 }}
             value={text}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setText(event.target.value);
             }}
-            name="text"
-            variant="standard"
-            className="sendWrap__input"
+            name='text'
+            variant='standard'
+            className='sendWrap__input'
           />
-          <Button type="submit" variant="contained" className="sendWrap__btn">
+          <Button type='submit' variant='contained' className='sendWrap__btn'>
             Send
           </Button>
         </div>
-      </Container>
-    </form>
+      </form>
+    </Container>
   );
 }
 
