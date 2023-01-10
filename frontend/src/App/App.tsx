@@ -11,6 +11,7 @@ import Sidebar from '../features/chat/Sidebar/Sidebar';
 import Loading from './Loading';
 
 import HomePage from '../features/chat/Home/HomePage';
+import UserSearch from '../features/chat/Search/UserSearch';
 // import AuthPage from '../RegLogView/Authorization';
 
 function App(): JSX.Element {
@@ -23,27 +24,30 @@ function App(): JSX.Element {
   const loading = useSelector(selectLoading);
 
   return (
-    <Box
-      className='main'
-      sx={{
-        hegiht: '100%',
-        display: 'flex',
-        margin: '7vh 10vw',
-        borderRadius: 8,
-        overflow: 'hidden',
-      }}
-    >
-      {loading ? (
-        <Loading />
-      ) : authCheckd ? (
-        <>
-          <Sidebar />
-          <HomePage />
-        </>
-      ) : (
-        <Auth />
-      )}
-    </Box>
+    <>
+      <UserSearch />
+      <Box
+        className="main"
+        sx={{
+          hegiht: '100%',
+          display: 'flex',
+          margin: '7vh 10vw',
+          borderRadius: 8,
+          overflow: 'hidden',
+        }}
+      >
+        {loading ? (
+          <Loading />
+        ) : authCheckd ? (
+          <>
+            <Sidebar />
+            <HomePage />
+          </>
+        ) : (
+          <Auth />
+        )}
+      </Box>
+    </>
   );
 }
 

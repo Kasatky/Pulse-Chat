@@ -7,14 +7,15 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate() {
+      User.Friends = User.belongsToMany(User, {foreignKey:'friend1Id',through:'Friends', as: 'Friends1'})
+      User.Friends2 = User.belongsToMany(User, {foreignKey:'friend2Id',through:'Friends' , as: 'Friends2'})
     }
   }
   User.init(
     {
       name: { type: DataTypes.TEXT, allowNull: false, unique: false },
-      email: { type: DataTypes.TEXT, allowNull: false, unique: true },
+      email: { type: DataTypes.TEXT, allowNull: false, unique: true, onDelete: 'CASCADE'},
       password: { type: DataTypes.TEXT, allowNull: false, unique: false },
     },
     {

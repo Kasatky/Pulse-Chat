@@ -12,7 +12,7 @@ function HomePage(): JSX.Element {
     []
   );
 
-  const { user, messages, sendMessage, text, setText } = useSocket(socket);
+  const { user, messages, text, setText, sendMessage } = useSocket(socket);
 
   return (
     <form onSubmit={sendMessage}>

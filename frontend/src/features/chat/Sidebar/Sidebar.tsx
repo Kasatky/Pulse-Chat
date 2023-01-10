@@ -1,21 +1,39 @@
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import { Button, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { logoutThunk } from '../../auth/authSlice';
 
 import SearchView from './SearchView';
 import Group from './Group&Direct';
 import { useAppDispatch } from '../../../store';
+import allFriendsSelector from '../Friends/selectors';
+import { loadFriendsThunk } from '../Friends/FriendsSlice';
+import { selectCurrentUser } from '../selectors';
+import FriendView from '../Friends/FriendView';
 
 function Sidebar(): JSX.Element {
   const dispatch = useAppDispatch();
+
+  const user = useSelector(selectCurrentUser);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(loadFriendsThunk(user.id));
+    }
+  }, [dispatch, user]);
+
   const handleLogout = (): void => {
     dispatch(logoutThunk());
   };
+
   const groups = ['Billionares club', 'Bates'];
-  const directs = ['Steve Jobs', 'Bill Gates'];
+
+  const friends = useSelector(allFriendsSelector);
+
   return (
     <Box sx={{ backgroundColor: '#43388B', height: '100' }}>
+      <SearchView />
       <Box
         sx={{
           width: 400,
@@ -24,7 +42,6 @@ function Sidebar(): JSX.Element {
           mb: '40vh',
         }}
       >
-        <SearchView />
         <>
           <Typography align="left" sx={{ ml: '1vw' }}>
             GROUPS
@@ -57,8 +74,8 @@ function Sidebar(): JSX.Element {
               flexDirection: 'column',
             }}
           >
-            {directs.map((el) => (
-              <Group item={el} />
+            {friends.map((friend) => (
+              <FriendView friend={friend} />
             ))}
           </Box>
         </>
@@ -78,4 +95,4 @@ function Sidebar(): JSX.Element {
   );
 }
 
-export default Sidebar;
+export default memo(Sidebar);
