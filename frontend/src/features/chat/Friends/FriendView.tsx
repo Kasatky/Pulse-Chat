@@ -17,13 +17,16 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        cursor: 'pointer',
       }}
     >
       {chat && (
         <>
           <Avatar
+            onClick={handleChatChange}
             sx={{
               margin: 2,
+              cursor: 'pointer',
             }}
           >
             {chat.name[0]}
