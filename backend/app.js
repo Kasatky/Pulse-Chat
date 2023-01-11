@@ -42,8 +42,6 @@ app.use("/api/friends", friendsRouter);
 ioSocket.on("connection", async (socket) => {
 try{
 
-  console.log(socket.handshake.session.userId)
-  
   socket.userId = socket.handshake.session.userId;
   
   socket.user = await User.findByPk(socket.userId);
@@ -59,14 +57,18 @@ try{
 
   socket.on("/messages/send", async (data) => {
     
-  const {text} = JSON.parse(data);
+  const {text, chatId} = JSON.parse(data);
+  
+  console.log(chatId)  
 
-  const message = await Message.create({text,username:socket.user.name,chatId:2});
+  if(chatId){
+
+  const message = await Message.create({text,username:socket.user.name,chatId});
 
   ioSocket.sockets.emit("/messages/recieve", message);
 
   console.log(`Message ${text} from ${socket.user.name} sended`);
-
+}
   });}
   catch(error) {
     console.log(error);

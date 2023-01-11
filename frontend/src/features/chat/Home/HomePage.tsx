@@ -9,9 +9,12 @@ import useSocket from '../Hooks/useSocket';
 import allChatsSelector from '../Friends/selectors';
 
 function ChatPage(): JSX.Element {
-  const { user, text, setText, sendMessage } = useSocket();
-  const chats = useSelector(allChatsSelector);
   const { id: chatId } = useParams();
+
+  const { user, text, setText, sendMessage } = useSocket(Number(chatId));
+
+  const chats = useSelector(allChatsSelector);
+
   const currentChat = chats.find((chat) => chat.id === Number(chatId));
 
   return (

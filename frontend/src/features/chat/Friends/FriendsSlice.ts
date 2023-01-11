@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import Message from '../types/Message';
 import addFriend, { loadFriends as loadChats } from './api';
 import Chat from './types/Chat';
 import FriendsState from './types/FriendsState';
@@ -19,9 +20,6 @@ export const loadChatsThunk = createAsyncThunk(
   '/friends/getFriends',
   async () => {
     const chats = await loadChats();
-
-    console.log(chats);
-
     return chats;
   }
 );
@@ -29,7 +27,16 @@ export const loadChatsThunk = createAsyncThunk(
 const FriendsSlice = createSlice({
   name: 'friends',
   initialState,
-  reducers: {},
+  reducers: {
+    recieveMessage: (state, action: PayloadAction<Message>) => {
+      const chatOfRecievedMessage = state.chats.find(
+        (chat) => chat.id === action.payload.chatId
+      );
+      if (chatOfRecievedMessage) {
+        chatOfRecievedMessage.Messages.push(action.payload);
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(
@@ -51,3 +58,4 @@ const FriendsSlice = createSlice({
 });
 
 export default FriendsSlice.reducer;
+export const { recieveMessage } = FriendsSlice.actions;
