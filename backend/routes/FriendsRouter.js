@@ -2,6 +2,16 @@ const chatsRouter = require('express').Router();
 const { User, Chat } = require('../db/models');
 const { Op } = require('sequelize');
 
+function findSocketOfUserFromMap(userId, sockets){
+  console.log(sockets)
+
+  const id =  [...sockets].find((socket)=>{
+    console.log(`${socket[1].userId} === ${userId}`)
+    return socket[1].userId === userId
+  })
+  return id ? id[0]:id
+}
+
 chatsRouter.post('/', async (req, res) => {
   try {
     const { user } = res.locals;
@@ -41,10 +51,16 @@ chatsRouter.post('/add', async (req, res) => {
     // }
 
     if (user) {
+
       if (chat) {
         if (secondUser.ProfilePic) {
-          res.json( {name:chat.name, id:chat.id, Messages:[], image: secondUser.ProfilePic.fileName} );
-        } else res.json( {name:chat.name, id:chat.id, Messages:[]} );
+        
+        const {io} = req.app.locals
+        
+        io.to(`User_${secondUser.id}room`).emit('/users/recieveInvite', {name:chat.name,id:chat.id, Messages:[], image: secondUser.ProfilePic.fileName})
+         
+         res.json( {name:chat.name, id:chat.id, Messages:[], image: secondUser.ProfilePic.fileName} );
+        } else io.to(`User_${secondUser.id}room`).emit('/users/recieveInvite', {name:chat.name,id:chat.id, Messages:[]})
       } else {
         res.json([]);
       }

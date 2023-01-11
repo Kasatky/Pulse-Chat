@@ -60,7 +60,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-
 export default function UserSearch(): JSX.Element {
   const [open, setOpen] = React.useState(false);
   const [text, setText] = React.useState("");
@@ -72,7 +71,7 @@ export default function UserSearch(): JSX.Element {
 
   const handleClose = (): void => {
     setOpen(false);
-    dispatch(resetSearch());
+    // dispatch(resetSearch());
   };
 
   const results = useSelector(foundUsersSelector);

@@ -7,6 +7,7 @@ type UseSocketResult = {
   text: string;
   setText: React.Dispatch<React.SetStateAction<string>>;
   socket: Socket;
+  getSocketId: () => string;
 };
 
 export default UseSocketResult;

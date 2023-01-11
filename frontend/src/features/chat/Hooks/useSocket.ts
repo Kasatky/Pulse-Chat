@@ -2,14 +2,20 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
 import { useAppDispatch } from '../../../store';
-import { recieveMessage } from '../Friends/FriendsSlice';
-import selectCurrentUser from '../selectors';
+import { recieveInvite, recieveMessage } from '../Friends/FriendsSlice';
+import Chat from '../Friends/types/Chat';
+import { selectCurrentUser } from '../selectors';
 import Message from '../types/Message';
 import UseSocketResult from './types/UseSocketResult';
 
-const socket = io(window.location.origin, { withCredentials: true });
+const socket = io(window.location.origin, {
+  withCredentials: true,
+  autoConnect: false,
+});
 
-export default function useSocket(chatId: number | undefined): UseSocketResult {
+export default function useSocket(
+  chatId?: number | undefined
+): UseSocketResult {
   const user = useSelector(selectCurrentUser);
 
   const dispatch = useAppDispatch();
@@ -22,16 +28,25 @@ export default function useSocket(chatId: number | undefined): UseSocketResult {
     setText('');
   };
 
+  const getSocketId = (): string => socket.id;
 
   useEffect(() => {
-    socket.on('/messages/recieve', (data: Message) => {
-      dispatch(recieveMessage(data));
-    });
-    return () => {
-      socket.disconnect();
-      socket.emit('/messages/disconnect');
-    };
-  }, [dispatch]);
+    if (user) {
+      socket.connect();
+      socket.on('/messages/recieve', (data: Message) => {
+        dispatch(recieveMessage(data));
+      });
 
-  return { user, sendMessage, text, setText, socket };
+      socket.on('/users/recieveInvite', (data: Chat) => {
+        dispatch(recieveInvite(data));
+      });
+
+      return () => {
+        socket.disconnect();
+        socket.emit('/messages/disconnect');
+      };
+    }
+  }, [dispatch, user]);
+
+  return { user, sendMessage, text, setText, socket, getSocketId };
 }

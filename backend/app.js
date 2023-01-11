@@ -24,12 +24,27 @@ const friendsRouter = require("./routes/FriendsRouter");
 
 const server = http.createServer(app);
 
+function check(req){
+  if(req.socket.isAuthenicated){
+    return {success:true}
+  }
+  else return {success:false}
+}
+
 const ioSocket = new io.Server(server, {
   cors: {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"],
     credentials:true
   },
+  allowRequest: (req, callback) => {
+try{
+  const isOriginValid = check(req);
+  callback(null, isOriginValid);
+}
+catch(err){
+  console.log(err)
+}  }
 });
 
 expressConfig(app, ioSocket);
@@ -41,37 +56,31 @@ app.use("/api/search", searchRouter);
 
 app.use("/api/friends", friendsRouter);
 
+app.locals.io = ioSocket;
+
 ioSocket.on("connection", async (socket) => {
-try{
+  try{
+  socket.join(`User_${socket.userId}room`)
 
-  socket.userId = socket.handshake.session.userId;
-  
-  socket.user = await User.findByPk(socket.userId);
-
-  const messages = await Message.findAll({
-    limit: 10,
-    order: [["createdAt", "DESC"]],
-  });
-
-  socket.emit("/messages", messages);
-  
+  app.locals.io = ioSocket;
 
 
   socket.on("/messages/send", async (data) => {
     
   const {text, chatId} = JSON.parse(data);
   
-  console.log(chatId)  
-
   if(chatId){
 
   const message = await Message.create({text,username:socket.user.name,chatId});
-
+    console.log(`Message: ${text} sended to chat${chatId}`);
   ioSocket.sockets.emit("/messages/recieve", message);
 
-  console.log(`Message ${text} from ${socket.user.name} sended`);
+}}
+
+);
+
+
 }
-  });}
   catch(error) {
     console.log(error);
   }}

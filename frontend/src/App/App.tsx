@@ -12,8 +12,6 @@ import ChatPage from '../features/chat/Home/HomePage';
 import { loadChatsThunk } from '../features/chat/Friends/FriendsSlice';
 import selectCurrentUser from '../features/chat/selectors';
 
-// import AuthPage from '../RegLogView/Authorization';
-
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -25,6 +23,7 @@ function App(): JSX.Element {
   useEffect(() => {
     if (user) {
       dispatch(loadChatsThunk());
+      // eslint-disable-next-line react-hooks/rules-of-hooks
     }
   }, [dispatch, user]);
 

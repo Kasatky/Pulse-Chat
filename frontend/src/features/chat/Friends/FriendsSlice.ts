@@ -36,6 +36,9 @@ const FriendsSlice = createSlice({
         chatOfRecievedMessage.Messages.push(action.payload);
       }
     },
+    recieveInvite: (state, action: PayloadAction<Chat>) => {
+      state.chats.push(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -58,4 +61,4 @@ const FriendsSlice = createSlice({
 });
 
 export default FriendsSlice.reducer;
-export const { recieveMessage } = FriendsSlice.actions;
+export const { recieveMessage, recieveInvite } = FriendsSlice.actions;
