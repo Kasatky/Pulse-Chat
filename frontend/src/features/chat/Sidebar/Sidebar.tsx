@@ -9,7 +9,7 @@ import { useAppDispatch } from '../../../store';
 import allChatsSelector from '../Friends/selectors';
 import ChatView from '../Friends/FriendView';
 import ModalUserWindow from '../ModalUserWindow/ModalUserWindow';
-import GroupAndDirect from "./GroupAndDirect";
+import GroupAndDirect from './GroupAndDirect';
 
 function Sidebar(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -18,27 +18,31 @@ function Sidebar(): JSX.Element {
     dispatch(logoutThunk());
   };
 
-  const groups = ['Billionares club', 'Bates'];
-
   const chats = useSelector(allChatsSelector);
 
-const groups = ["Billionares club", "Bates"];
+  const groups = ['Billionares club', 'Bates'];
 
-const directs = ["Steve Jobs", "Bill Gates"];
+  const messages = [
+    'Hi, girls',
+    'Nice job',
+    'Im glad to see you, sit down please',
+    'i need your ...',
+  ];
 
-const messages = ["Hi, girls", "Nice job", 'Im glad to see you, sit down please', 'i need your ...'];
-
-return (
-  
-
-    <Box sx={{ backgroundColor: "#212329", height: "100" }}>
-  <SearchView />
-  <Box sx={{
-        margin: 4,
-        fontSize: 5,
-      }}>
-        <Typography variant="h4" align="left" sx={{ ml: "1vw", mb: "3vh", color: "white" }}>
-
+  return (
+    <Box sx={{ backgroundColor: '#212329', height: '100' }}>
+      <SearchView />
+      <Box
+        sx={{
+          margin: 4,
+          fontSize: 5,
+        }}
+      >
+        <Typography
+          variant="h4"
+          align="left"
+          sx={{ ml: '1vw', mb: '3vh', color: 'white' }}
+        >
           Messages
         </Typography>
       </Box>
@@ -57,7 +61,7 @@ return (
         </Box>
 
         <>
-          <Typography align='left' sx={{ ml: '1vw' }}>
+          <Typography align="left" sx={{ ml: '1vw' }}>
             GROUPS
           </Typography>
           <Box
@@ -65,20 +69,20 @@ return (
               width: '100%',
 
               // height: 130,
-              display: "flex",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'column',
 
               mb: 10,
             }}
           >
             {groups.map((el, index) => (
-              <GroupAndDirect item={el} message = {messages[index]} />
+              <GroupAndDirect item={el} message={messages[index]} />
             ))}
           </Box>
         </>
 
         <>
-          <Typography align='left' sx={{ ml: '1vw', mb: '3vh' }}>
+          <Typography align="left" sx={{ ml: '1vw', mb: '3vh' }}>
             DIRECT
           </Typography>
 
@@ -91,7 +95,6 @@ return (
             }}
           >
             {chats && chats.map((chat) => <ChatView chat={chat} />)}
-
           </Box>
         </>
       </Box>
@@ -103,7 +106,7 @@ return (
         }}
         disableElevation
         onClick={handleLogout}
-        variant='contained'
+        variant="contained"
       >
         Logout...
       </Button>

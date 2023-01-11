@@ -12,7 +12,7 @@ function Layout(): JSX.Element {
   const loading = useSelector(selectLoading);
   return (
     <>
-      <Link to="/chats/2">Fuckyourself</Link>
+      <Link to="/chats/2">Test link</Link>
       <UserSearch />
       <Box
         className="main"

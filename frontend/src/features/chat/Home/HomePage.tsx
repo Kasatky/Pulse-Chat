@@ -12,12 +12,7 @@ function ChatPage(): JSX.Element {
   const { user, text, setText, sendMessage } = useSocket();
   const chats = useSelector(allChatsSelector);
   const { id: chatId } = useParams();
-  console.log('______________________');
-  console.log(chats);
-
-
   const currentChat = chats.find((chat) => chat.id === Number(chatId));
-  console.log('______________________');
 
   return (
     <Container
@@ -30,11 +25,17 @@ function ChatPage(): JSX.Element {
       }}
     >
       <form
-        style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}
+        style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          flex: 1,
+        }}
         onSubmit={sendMessage}
       >
         <Box
-          className='messages'
+          className="messages"
           sx={{
             position: 'relative',
             height: 0,
@@ -56,28 +57,36 @@ function ChatPage(): JSX.Element {
                 <CompanionMessageView message={message} />
               )
             )}
-
         </Box>
 
-        <div className='mainInput'>
-          <div className='sendWrap'>
+        <div className="mainInput">
+          <div className="sendWrap">
             <TextField
               sx={{ margin: 2, input: { color: 'white' } }}
               value={text}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setText(event.target.value);
               }}
-              name='text'
-              variant='standard'
-              className='sendWrap__input'
+              name="text"
+              variant="standard"
+              className="sendWrap__input"
             />
             <Button
-              sx={{ borderRadius: '50%', width: '50px', height: '50px', minWidth: '0px' }}
-              type='submit'
-              variant='contained'
-              className='sendWrap__btn'
+              sx={{
+                borderRadius: '50%',
+                width: '50px',
+                height: '50px',
+                minWidth: '0px',
+              }}
+              type="submit"
+              variant="contained"
+              className="sendWrap__btn"
             >
-              <img style={{ height: 30 }} src='https://cdn-icons-png.flaticon.com/512/9068/9068203.png' alt='fly' />
+              <img
+                style={{ height: 30 }}
+                src="https://cdn-icons-png.flaticon.com/512/9068/9068203.png"
+                alt="fly"
+              />
             </Button>
           </div>
         </div>

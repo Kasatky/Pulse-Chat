@@ -1,16 +1,11 @@
-import { Avatar } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
-import useSocket from '../Hooks/useSocket';
-import CompanionMessageView from '../MessageView/CompanionMessageView';
-import UserMessageView from '../MessageView/UserMessageView';
 import Chat from './types/Chat';
 
 type ChatViewProps = { chat: Chat };
 
 function ChatView({ chat }: ChatViewProps): JSX.Element {
-  const { user } = useSocket();
-
   return (
     <Box
       sx={{
@@ -28,15 +23,7 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
           >
             {chat.name[0]}
           </Avatar>
-          <div>
-            {chat.Messages.map((m) =>
-              user?.name === m.username ? (
-                <UserMessageView message={m} />
-              ) : (
-                <CompanionMessageView message={m} />
-              )
-            )}
-          </div>
+          <Typography>{chat.name}</Typography>
         </>
       )}
     </Box>
