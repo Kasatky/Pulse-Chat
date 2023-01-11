@@ -28,6 +28,7 @@ function App(): JSX.Element {
       sx={{
         hegiht: '100%',
         display: 'flex',
+        alignItems:'stretch',
         margin: '7vh 10vw',
         borderRadius: 8,
         overflow: 'hidden',

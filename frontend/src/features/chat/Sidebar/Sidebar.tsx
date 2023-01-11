@@ -1,8 +1,7 @@
-import { Box } from "@mui/system";
-import React from "react";
-import { Button, Typography } from "@mui/material";
-import { logoutThunk } from "../../auth/authSlice";
-
+import { Box } from '@mui/system';
+import React from 'react';
+import { Button, Typography } from '@mui/material';
+import { logoutThunk } from '../../auth/authSlice';
 
 import SearchView from './SearchView';
 import { useAppDispatch } from '../../../store';
@@ -14,6 +13,7 @@ function Sidebar(): JSX.Element {
   const handleLogout = (): void => {
     dispatch(logoutThunk());
   };
+
   const groups = ["Billionares club", "Bates"];
   const directs = ["Steve Jobs", "Bill Gates"];
   const messages = ["Hi, girls", "Nice job", 'Im glad to see you, sit down please', 'i need your ...'];
@@ -25,34 +25,36 @@ function Sidebar(): JSX.Element {
         fontSize: 5,
       }}>
         <Typography variant="h4" align="left" sx={{ ml: "1vw", mb: "3vh", color: "white" }}>
+
           Messages
         </Typography>
       </Box>
 
       <Box
         sx={{
-          width: 400,
-          color: "white",
+          width: '100%',
+          color: 'white',
 
           opacity: 0.8,
-          mb: "40vh",
+          mb: '40vh',
         }}
       >
+        <Box>
+          <SearchView />
+        </Box>
 
-        <Box ><SearchView /></Box>
-        
         <>
-
-          <Typography align="left" sx={{ ml: "1vw" }}>
-
+          <Typography align='left' sx={{ ml: '1vw' }}>
             GROUPS
           </Typography>
           <Box
             sx={{
               width: '100%',
+
               // height: 130,
               display: "flex",
               flexDirection: "column",
+
               mb: 10,
             }}
           >
@@ -63,9 +65,7 @@ function Sidebar(): JSX.Element {
         </>
 
         <>
-
-          <Typography align="left" sx={{ ml: "1vw", mb: "3vh" }}>
-
+          <Typography align='left' sx={{ ml: '1vw', mb: '3vh' }}>
             DIRECT
           </Typography>
 
@@ -73,8 +73,8 @@ function Sidebar(): JSX.Element {
             sx={{
               width: '100%',
               height: 30,
-              display: "flex",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'column',
             }}
           >
             {directs.map((el,index) => (
@@ -83,11 +83,11 @@ function Sidebar(): JSX.Element {
           </Box>
         </>
       </Box>
-      <ModalUserWindow/>
+      <ModalUserWindow />
       <Button
         sx={{
-          width: "100%",
-          height: "3vh",
+          width: '100%',
+          height: '3vh',
         }}
         disableElevation
         onClick={handleLogout}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -33,6 +33,16 @@ function ModalUserWindow(): JSX.Element {
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);
 
+  const [newNick, setNewNick] = useState(user?.name);
+
+  const handleNicknameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setNewNick(event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent): void => {
+    event.preventDefault();
+    // дописать
+  };
   return (
     <div>
       <Button sx={{ color: 'black' }} onClick={handleOpen}>
@@ -47,6 +57,7 @@ function ModalUserWindow(): JSX.Element {
           <Typography id='modal-modal-title' variant='h6' component='h2'>
             Edit profile
           </Typography>
+
           <Typography id='modal-modal-description' sx={{ alignItems: 'center', mt: 2, display: 'flex', flexDirection: 'column' }}>
             <Box
               sx={{
@@ -61,13 +72,20 @@ function ModalUserWindow(): JSX.Element {
             >
               {user?.name[0]}
             </Box>
-            <>
-              <TextField sx={{ marginTop: 5, marginBottom: 5 }} fullWidth label='Nickname' id='fullWidth' value={user?.name} />
+            <form onSubmit={handleSubmit}>
+              <TextField
+                sx={{ marginTop: 5, marginBottom: 5 }}
+                fullWidth
+                label='Nickname'
+                id='fullWidth'
+                value={newNick}
+                onChange={handleNicknameChange}
+              />
               <TextField fullWidth label='Bio' id='fullWidth' />
-              <Button sx={{ marginTop: 5, marginBottom: 5 }} variant='contained'>
-                Contained
+              <Button type='submit' sx={{ marginTop: 5, marginBottom: 5 }} variant='contained'>
+                Save
               </Button>
-            </>
+            </form>
           </Typography>
         </Box>
       </Modal>
