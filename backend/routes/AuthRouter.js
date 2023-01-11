@@ -6,14 +6,23 @@ authRouter.get("/user", async (req, res) => {
   const { user } = res.locals;
 
   if (user) {
+    if (user.ProfilePic) {
+      res.json({
+        isLoggedIn: true,
+        user: {
+          id: user.id,
+          name: user.name,
+          image: user.ProfilePic.fileName,
+        },
+      });
+    } else{
     res.json({
       isLoggedIn: true,
       user: {
         id: user.id,
         name: user.name,
-        image: user.ProfilePic.fileName,
       },
-    });
+    })}
   } else {
     res.json({ isLoggedIn: false, user: undefined });
   }

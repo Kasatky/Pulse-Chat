@@ -33,7 +33,26 @@ function FoundUserView({ user }: FoundUserViewProps): JSX.Element {
         alignItems: 'center',
       }}
     >
-      <Avatar>{user.name[0]}</Avatar>
+      {user?.image ? (
+        <Box
+          sx={{
+            height: 40,
+            width: 40,
+            borderRadius: '50%',
+            backgroundImage: `url(/img/${user?.image})`,
+            backgroundSize: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        />
+      ) : (
+        <Avatar sx={{
+          height: 40,
+          width: 40,
+        }}>{user.name[0]}</Avatar>
+      )}
+
       <Typography
         align="left"
         variant="h1"

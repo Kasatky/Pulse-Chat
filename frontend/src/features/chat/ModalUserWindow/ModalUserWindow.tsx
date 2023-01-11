@@ -5,8 +5,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Avatar, TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
-import UploadFile from '../UploadFile/UploadFile';
 import SettingsIcon from '@mui/icons-material/Settings';
+import UploadFile from '../UploadFile/UploadFile';
 import selectCurrentUser from '../selectors';
 
 function ModalUserWindow(): JSX.Element {
@@ -49,7 +49,7 @@ function ModalUserWindow(): JSX.Element {
   return (
     <div>
       <Button sx={{ color: 'black' }} onClick={handleOpen}>
-      <SettingsIcon />
+        <SettingsIcon />
 
       </Button>
       <Modal open={open} onClose={handleClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
