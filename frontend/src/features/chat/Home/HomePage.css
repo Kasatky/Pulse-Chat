@@ -5,19 +5,18 @@
   border: 1px solid black;
   border-radius: 70px;
   padding: 5px 50px 5px 50px;
-  background-color: #1E1F25;
-
+  background-color: #1e1f25;
 }
 
 .sendWrap__input {
   flex-grow: 1;
   color: white;
+  
 }
 
 .sendWrap__btn {
   flex-shrink: 0;
 }
-.mainInput{
+.mainInput {
   background-color: gray;
-  
 }
