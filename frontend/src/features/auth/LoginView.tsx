@@ -7,23 +7,23 @@ import {
   Grid,
   TextField,
   Typography,
-} from '@mui/material';
-import { useCallback, useState } from 'react';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+} from "@mui/material";
+import { useCallback, useState } from "react";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useSelector } from "react-redux";
+import { logInUserThunk } from "./authSlice";
+import { useAppDispatch } from "../../store";
 
 // import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../store';
-import { logInUserThunk } from './authSlice';
 // import LoginView from './LoginView';
-import { errorSelector } from './selectors';
+import { errorSelector } from "./selectors";
 
 function Auth(): JSX.Element {
   const error = useSelector(errorSelector);
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
 
   const dispatch = useAppDispatch();
 
@@ -47,19 +47,25 @@ function Auth(): JSX.Element {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{
+        display: "flex",
+      }}
+    >
       {error && <h1>{error}</h1>}
 
       <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -70,6 +76,7 @@ function Auth(): JSX.Element {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  color="primary"
                   onChange={handleEmailChange}
                   value={email}
                   name="email"

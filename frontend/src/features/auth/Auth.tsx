@@ -9,10 +9,10 @@ function Auth(): JSX.Element {
   const error = useSelector(errorSelector);
   const [viewLogin, setViewLogin] = useState(true);
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" >
       {error && <h1>{error}</h1>}
       {viewLogin ? <LoginView /> : <RegistrationView />}
-      <Grid container justifyContent="center">
+      <Grid container justifyContent="center" >
         <Grid item>
           <Link
             onClick={() => {
