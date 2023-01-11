@@ -1,26 +1,39 @@
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { memo } from 'react';
 import { Button, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { logoutThunk } from '../../auth/authSlice';
 
 import SearchView from './SearchView';
 import { useAppDispatch } from '../../../store';
+import allChatsSelector from '../Friends/selectors';
+import ChatView from '../Friends/FriendView';
 import ModalUserWindow from '../ModalUserWindow/ModalUserWindow';
 import GroupAndDirect from "./GroupAndDirect";
 
 function Sidebar(): JSX.Element {
   const dispatch = useAppDispatch();
+
   const handleLogout = (): void => {
     dispatch(logoutThunk());
   };
 
-  const groups = ["Billionares club", "Bates"];
-  const directs = ["Steve Jobs", "Bill Gates"];
-  const messages = ["Hi, girls", "Nice job", 'Im glad to see you, sit down please', 'i need your ...'];
-  return (
+  const groups = ['Billionares club', 'Bates'];
+
+  const chats = useSelector(allChatsSelector);
+
+const groups = ["Billionares club", "Bates"];
+
+const directs = ["Steve Jobs", "Bill Gates"];
+
+const messages = ["Hi, girls", "Nice job", 'Im glad to see you, sit down please', 'i need your ...'];
+
+return (
+  
 
     <Box sx={{ backgroundColor: "#212329", height: "100" }}>
-      <Box sx={{
+  <SearchView />
+  <Box sx={{
         margin: 4,
         fontSize: 5,
       }}>
@@ -77,9 +90,8 @@ function Sidebar(): JSX.Element {
               flexDirection: 'column',
             }}
           >
-            {directs.map((el,index) => (
-              <GroupAndDirect item={el} message = {messages[index+2]} />
-            ))}
+            {chats && chats.map((chat) => <ChatView chat={chat} />)}
+
           </Box>
         </>
       </Box>
@@ -99,4 +111,4 @@ function Sidebar(): JSX.Element {
   );
 }
 
-export default Sidebar;
+export default memo(Sidebar);

@@ -1,16 +1,17 @@
 import './App.css';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 
-import { Box } from '@mui/system';
-import Auth from '../features/auth/Auth';
+import { Route, Routes } from 'react-router-dom';
+
+import { useSelector } from 'react-redux';
+import Layout from '../features/Layout';
+
 import { useAppDispatch } from '../store';
 import { userCheckThunk } from '../features/auth/authSlice';
-import { selectIsLoggedIn, selectLoading } from '../features/auth/selectors';
-import Sidebar from '../features/chat/Sidebar/Sidebar';
-import Loading from './Loading';
+import ChatPage from '../features/chat/Home/HomePage';
+import { selectCurrentUser } from '../features/chat/selectors';
+import { loadChatsThunk } from '../features/chat/Friends/FriendsSlice';
 
-import HomePage from '../features/chat/Home/HomePage';
 // import AuthPage from '../RegLogView/Authorization';
 
 function App(): JSX.Element {
@@ -19,32 +20,21 @@ function App(): JSX.Element {
     dispatch(userCheckThunk());
   }, [dispatch]);
 
-  const authCheckd = useSelector(selectIsLoggedIn);
-  const loading = useSelector(selectLoading);
+  const user = useSelector(selectCurrentUser);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(loadChatsThunk());
+    }
+  }, [dispatch, user]);
 
   return (
-    <Box
-      className='main'
-      sx={{
-        hegiht: '100%',
-        display: 'flex',
-        alignItems:'stretch',
-        margin: '7vh 10vw',
-        borderRadius: 8,
-        overflow: 'hidden',
-      }}
-    >
-      {loading ? (
-        <Loading />
-      ) : authCheckd ? (
-        <>
-          <Sidebar />
-          <HomePage />
-        </>
-      ) : (
-        <Auth />
-      )}
-    </Box>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<div>Hello world</div>} />
+        <Route path="/chats/:id" element={<ChatPage />} />
+      </Route>
+    </Routes>
   );
 }
 

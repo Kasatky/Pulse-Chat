@@ -17,6 +17,10 @@ const { Message, User } = require("./db/models");
 
 const authRouter = require("./routes/AuthRouter");
 
+const searchRouter = require("./routes/SearchRouter");
+
+const friendsRouter = require("./routes/FriendsRouter");
+
 const server = http.createServer(app);
 
 const ioSocket = new io.Server(server, {
@@ -31,32 +35,38 @@ expressConfig(app, ioSocket);
 
 app.use("/api/auth", authRouter);
 
+app.use("/api/search", searchRouter);
+
+app.use("/api/friends", friendsRouter);
 
 ioSocket.on("connection", async (socket) => {
 try{
 
   console.log(socket.handshake.session.userId)
+  
+  socket.userId = socket.handshake.session.userId;
+  
+  socket.user = await User.findByPk(socket.userId);
 
   const messages = await Message.findAll({
-    limit: 1000,
+    limit: 10,
     order: [["createdAt", "DESC"]],
   });
 
   socket.emit("/messages", messages);
   
-  socket.userId = socket.handshake.session.userId;
 
-  socket.user = await User.findByPk(socket.userId);
 
   socket.on("/messages/send", async (data) => {
+    
+  const {text} = JSON.parse(data);
 
-    const {text} = JSON.parse(data);
+  const message = await Message.create({text,username:socket.user.name,chatId:2});
 
-    const message = await Message.create({text,username:socket.user.name});
+  ioSocket.sockets.emit("/messages/recieve", message);
 
-    ioSocket.sockets.emit("/messages/recieve", message);
+  console.log(`Message ${text} from ${socket.user.name} sended`);
 
-    console.log(`Message ${text} from ${socket.user.name} sended`);
   });}
   catch(error) {
     console.log(error);

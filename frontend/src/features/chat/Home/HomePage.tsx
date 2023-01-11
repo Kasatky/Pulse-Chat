@@ -1,15 +1,23 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Box, Button, Container, TextField } from '@mui/material';
-import { io, Socket } from 'socket.io-client';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import CompanionMessageView from '../MessageView/CompanionMessageView';
 import './HomePage.css';
 import UserMessageView from '../MessageView/UserMessageView';
 import useSocket from '../Hooks/useSocket';
+import allChatsSelector from '../Friends/selectors';
 
-function HomePage(): JSX.Element {
-  const socket: Socket = useMemo(() => io(window.location.origin, { withCredentials: true }), []);
+function ChatPage(): JSX.Element {
+  const { user, text, setText, sendMessage } = useSocket();
+  const chats = useSelector(allChatsSelector);
+  const { id: chatId } = useParams();
+  console.log('______________________');
+  console.log(chats);
 
-  const { user, messages, sendMessage, text, setText } = useSocket(socket);
+
+  const currentChat = chats.find((chat) => chat.id === Number(chatId));
+  console.log('______________________');
 
   return (
     <Container
@@ -40,9 +48,15 @@ function HomePage(): JSX.Element {
             },
           }}
         >
-          {messages.map((message) =>
-            user?.name === message.username ? <UserMessageView message={message} /> : <CompanionMessageView message={message} />
-          )}
+          {currentChat &&
+            currentChat.Messages.map((message) =>
+              user?.name === message.username ? (
+                <UserMessageView message={message} />
+              ) : (
+                <CompanionMessageView message={message} />
+              )
+            )}
+
         </Box>
 
         <div className='mainInput'>
@@ -72,4 +86,4 @@ function HomePage(): JSX.Element {
   );
 }
 
-export default HomePage;
+export default ChatPage;
