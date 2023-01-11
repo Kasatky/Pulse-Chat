@@ -27,7 +27,10 @@ function expressConfig(app, io) {
   // io.use((socket, next)=> {
   //     sessionMiddleware(socket.request, socket.request.res, next);
   // });
-  app.use(fileUpload({createParentPath:true}))
+  app.use(fileUpload({
+    createParentPath:true,
+    limits: { fileSize: 50 * 1024 * 1024 },
+  }))
 
   app.use(express.static(path.join(__dirname, "../../frontend/build")));
 
