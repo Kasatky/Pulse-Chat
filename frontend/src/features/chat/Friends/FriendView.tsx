@@ -1,11 +1,16 @@
 import { Avatar } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
-import User from '../../auth/types/User';
+import useSocket from '../Hooks/useSocket';
+import CompanionMessageView from '../MessageView/CompanionMessageView';
+import UserMessageView from '../MessageView/UserMessageView';
+import Chat from './types/Chat';
 
-type FriendProps = { friend: User };
+type ChatViewProps = { chat: Chat };
 
-function FriendView({ friend }: FriendProps): JSX.Element {
+function ChatView({ chat }: ChatViewProps): JSX.Element {
+  const { user } = useSocket();
+
   return (
     <Box
       sx={{
@@ -14,16 +19,28 @@ function FriendView({ friend }: FriendProps): JSX.Element {
         alignItems: 'center',
       }}
     >
-      <Avatar
-        sx={{
-          margin: 2,
-        }}
-      >
-        {friend.name[0]}
-      </Avatar>{' '}
-      <div>{friend.name}</div>
+      {chat && (
+        <>
+          <Avatar
+            sx={{
+              margin: 2,
+            }}
+          >
+            {chat.name[0]}
+          </Avatar>
+          <div>
+            {chat.Messages.map((m) =>
+              user?.name === m.username ? (
+                <UserMessageView message={m} />
+              ) : (
+                <CompanionMessageView message={m} />
+              )
+            )}
+          </div>
+        </>
+      )}
     </Box>
   );
 }
 
-export default FriendView;
+export default ChatView;

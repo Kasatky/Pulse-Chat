@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { Button, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { logoutThunk } from '../../auth/authSlice';
@@ -7,21 +7,11 @@ import { logoutThunk } from '../../auth/authSlice';
 import SearchView from './SearchView';
 import Group from './Group&Direct';
 import { useAppDispatch } from '../../../store';
-import allFriendsSelector from '../Friends/selectors';
-import { loadFriendsThunk } from '../Friends/FriendsSlice';
-import { selectCurrentUser } from '../selectors';
-import FriendView from '../Friends/FriendView';
+import allChatsSelector from '../Friends/selectors';
+import ChatView from '../Friends/FriendView';
 
 function Sidebar(): JSX.Element {
   const dispatch = useAppDispatch();
-
-  const user = useSelector(selectCurrentUser);
-
-  useEffect(() => {
-    if (user) {
-      dispatch(loadFriendsThunk(user.id));
-    }
-  }, [dispatch, user]);
 
   const handleLogout = (): void => {
     dispatch(logoutThunk());
@@ -29,7 +19,7 @@ function Sidebar(): JSX.Element {
 
   const groups = ['Billionares club', 'Bates'];
 
-  const friends = useSelector(allFriendsSelector);
+  const chats = useSelector(allChatsSelector);
 
   return (
     <Box sx={{ backgroundColor: '#43388B', height: '100' }}>
@@ -74,9 +64,7 @@ function Sidebar(): JSX.Element {
               flexDirection: 'column',
             }}
           >
-            {friends.map((friend) => (
-              <FriendView friend={friend} />
-            ))}
+            {chats && chats.map((chat) => <ChatView chat={chat} />)}
           </Box>
         </>
       </Box>

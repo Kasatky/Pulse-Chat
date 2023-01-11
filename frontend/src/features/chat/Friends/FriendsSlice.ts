@@ -1,25 +1,28 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import User from '../../auth/types/User';
-import addFriend, { loadFriends } from './api';
+import addFriend, { loadFriends as loadChats } from './api';
+import Chat from './types/Chat';
 import FriendsState from './types/FriendsState';
 
 const initialState: FriendsState = {
-  friends: [],
+  chats: [],
 };
 
-export const addFriendThunk = createAsyncThunk(
-  '/friends/addFriend',
+export const addChatThunk = createAsyncThunk(
+  '/friends/addChat',
   async (id: number) => {
-    const addedFriend = await addFriend(id);
-    return addedFriend;
+    const addedChat = await addFriend(id);
+    return addedChat;
   }
 );
 
-export const loadFriendsThunk = createAsyncThunk(
+export const loadChatsThunk = createAsyncThunk(
   '/friends/getFriends',
-  async (id: number) => {
-    const friends = await loadFriends(id);
-    return friends;
+  async () => {
+    const chats = await loadChats();
+
+    console.log(chats);
+
+    return chats;
   }
 );
 
@@ -30,21 +33,18 @@ const FriendsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(
-        loadFriendsThunk.fulfilled,
-        (state, action: PayloadAction<User[]>) => {
-          state.friends = action.payload;
+        loadChatsThunk.fulfilled,
+        (state, action: PayloadAction<Chat[]>) => {
+          state.chats = action.payload;
         }
       )
-      .addCase(loadFriendsThunk.rejected, (state, action) => {
+      .addCase(loadChatsThunk.rejected, (state, action) => {
         state.error = action.error.message;
       })
-      .addCase(
-        addFriendThunk.fulfilled,
-        (state, action: PayloadAction<User>) => {
-          state.friends.push(action.payload);
-        }
-      )
-      .addCase(addFriendThunk.rejected, (state, action) => {
+      .addCase(addChatThunk.fulfilled, (state, action) => {
+        state.chats.push(action.payload.chat);
+      })
+      .addCase(addChatThunk.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },

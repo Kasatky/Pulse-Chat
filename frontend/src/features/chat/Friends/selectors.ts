@@ -1,6 +1,6 @@
 import { RootState } from '../../../store';
-import User from '../../auth/types/User';
+import Chat from './types/Chat';
 
-const allFriendsSelector = (state: RootState): User[] => state.friends.friends;
+const allChatsSelector = (state: RootState): Chat[] => state.friends.chats;
 
-export default allFriendsSelector;
+export default allChatsSelector;

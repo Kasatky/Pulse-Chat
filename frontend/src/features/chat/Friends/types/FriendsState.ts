@@ -1,7 +1,7 @@
-import User from '../../../auth/types/User';
+import Chat from './Chat';
 
 type FriendsState = {
-  friends: User[];
+  chats: Chat[];
   error?: string;
 };
 

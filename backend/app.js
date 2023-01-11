@@ -19,6 +19,8 @@ const authRouter = require("./routes/AuthRouter");
 
 const searchRouter = require("./routes/SearchRouter");
 
+const friendsRouter = require("./routes/FriendsRouter");
+
 const server = http.createServer(app);
 
 const ioSocket = new io.Server(server, {
@@ -32,15 +34,19 @@ const ioSocket = new io.Server(server, {
 expressConfig(app, ioSocket);
 
 app.use("/api/auth", authRouter);
-app.use("/api", searchRouter);
 
+app.use("/api/search", searchRouter);
 
-
+app.use("/api/friends", friendsRouter);
 
 ioSocket.on("connection", async (socket) => {
 try{
 
   console.log(socket.handshake.session.userId)
+  
+  socket.userId = socket.handshake.session.userId;
+  
+  socket.user = await User.findByPk(socket.userId);
 
   const messages = await Message.findAll({
     limit: 10,
@@ -49,17 +55,13 @@ try{
 
   socket.emit("/messages", messages);
   
-  socket.userId = socket.handshake.session.userId;
 
-  socket.user = await User.findByPk(socket.userId);
 
   socket.on("/messages/send", async (data) => {
     
-  console.log(data)
-
   const {text} = JSON.parse(data);
 
-  const message = await Message.create({text,username:socket.user.name});
+  const message = await Message.create({text,username:socket.user.name,chatId:2});
 
   ioSocket.sockets.emit("/messages/recieve", message);
 

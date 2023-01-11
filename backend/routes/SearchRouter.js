@@ -3,16 +3,16 @@ const { User } = require("../db/models");
 const { Op } = require("sequelize");
 
 
-searchRouter.post("/search", async (req, res) => {
+searchRouter.post("/", async (req, res) => {
     try{
+    const { user } = res.locals;
   
   const {username}  = req.body;
 
   const foundUsers = await User.findAll({ where: {name:{  [Op.substring]: `${username}`, }}, limit:8 });
 
-
   if(foundUsers){
-    res.json(foundUsers.map((user) => {return {id:user.id, name:user.name}}))}
+    res.json(foundUsers.map((foundUser) => {return {id:foundUser.id, name:foundUser.name}}).filter((foundUser)=>foundUser.id!==user.id))}
     else{
       res.json([])
     }}

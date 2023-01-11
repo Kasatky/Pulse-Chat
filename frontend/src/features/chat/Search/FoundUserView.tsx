@@ -3,13 +3,22 @@ import MapsUgcRoundedIcon from '@mui/icons-material/MapsUgcRounded';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import React, { memo, useState } from 'react';
 import User from '../../auth/types/User';
+import { useAppDispatch } from '../../../store';
+import { addChatThunk } from '../Friends/FriendsSlice';
 
 type FoundUserViewProps = {
   user: User;
 };
 
 function FoundUserView({ user }: FoundUserViewProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const [added, setAdded] = useState(false);
+
+  const handleIconClick = (): void => {
+    setAdded(true);
+    dispatch(addChatThunk(user.id));
+  };
 
   return (
     <Box
@@ -38,7 +47,7 @@ function FoundUserView({ user }: FoundUserViewProps): JSX.Element {
       >
         {user.name}
       </Typography>
-      <IconButton onClick={() => setAdded(true)} color="secondary">
+      <IconButton onClick={handleIconClick} color="secondary">
         {added ? <CheckRoundedIcon /> : <MapsUgcRoundedIcon />}
       </IconButton>
     </Box>
