@@ -37,7 +37,8 @@ function expressConfig(app, io) {
     
     
 
-  app.use(express.static(path.join(__dirname, "../../frontend/build")));
+  // app.use(express.static(path.join(__dirname, "../../frontend/build")));
+  app.use(express.static(path.resolve("public")));
 
   app.use(morgan("dev"));
 
