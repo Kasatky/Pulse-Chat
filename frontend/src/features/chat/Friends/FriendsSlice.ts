@@ -49,7 +49,7 @@ const FriendsSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(addChatThunk.fulfilled, (state, action) => {
-        state.chats.push(action.payload.chat);
+        state.chats.push(action.payload);
       })
       .addCase(addChatThunk.rejected, (state, action) => {
         state.error = action.error.message;

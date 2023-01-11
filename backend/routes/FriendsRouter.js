@@ -47,7 +47,7 @@ chatsRouter.post('/add', async (req, res) => {
 
     if (user) {
       if (chat) {
-        res.json({ friend: { id: secondUser.id, name: secondUser.name }, chatId: chat.id });
+        res.json( {name:chat.name, id:chat.id, Messages:[]} );
       } else {
         res.json([]);
       }
