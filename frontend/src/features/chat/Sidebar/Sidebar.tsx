@@ -4,12 +4,13 @@ import { Button, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { logoutThunk } from '../../auth/authSlice';
 
-import SearchView from './SearchView';
+// import SearchView from './SearchView';
 import { useAppDispatch } from '../../../store';
 import allChatsSelector from '../Friends/selectors';
 import ChatView from '../Friends/FriendView';
 import ModalUserWindow from '../ModalUserWindow/ModalUserWindow';
 import GroupAndDirect from './GroupAndDirect';
+import UserSearch from '../Search/UserSearch';
 
 function Sidebar(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -31,7 +32,6 @@ function Sidebar(): JSX.Element {
 
   return (
     <Box sx={{ backgroundColor: '#212329', height: '100' }}>
-      <SearchView />
       <Box
         sx={{
           margin: 4,
@@ -57,7 +57,7 @@ function Sidebar(): JSX.Element {
         }}
       >
         <Box>
-          <SearchView />
+          <UserSearch />
         </Box>
 
         <>
