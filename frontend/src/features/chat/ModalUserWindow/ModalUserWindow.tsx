@@ -5,7 +5,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../selectors';
+import selectCurrentUser from '../selectors';
+
 
 function ModalUserWindow(): JSX.Element {
   const user = useSelector(selectCurrentUser);

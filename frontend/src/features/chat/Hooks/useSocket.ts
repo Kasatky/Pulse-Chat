@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
 import { useAppDispatch } from '../../../store';
 import { recieveMessage } from '../Friends/FriendsSlice';
-import { selectCurrentUser } from '../selectors';
+import selectCurrentUser from '../selectors';
 import Message from '../types/Message';
 import UseSocketResult from './types/UseSocketResult';
 
