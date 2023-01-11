@@ -44,7 +44,7 @@ function Layout(): JSX.Element {
           className="main"
           sx={{
             maxWidth: "xs",
-            hegiht: "100%",
+            // hegiht: "100%",
 
             display: "flex",
             margin: "7vh 10vw",
@@ -70,7 +70,7 @@ function Layout(): JSX.Element {
             sx={{
               minWidth: "md",
             
-              hegiht: "100%",
+              // hegiht: "100%",
               display: "flex",
               m: "auto",
               my: "auto",

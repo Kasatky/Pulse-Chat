@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
+import SettingsIcon from '@mui/icons-material/Settings';
 import selectCurrentUser from '../selectors';
 
 
@@ -47,11 +48,8 @@ function ModalUserWindow(): JSX.Element {
   return (
     <div>
       <Button sx={{ color: 'black' }} onClick={handleOpen}>
-        <img
-          style={{ height: 30 }}
-          src='https://cdn-icons.flaticon.com/svg/3917/3917058.svg?token=exp=1673278794~hmac=81b7b5c0c23c1ef6a71ee024c6d33603'
-          alt='icon'
-        />
+      <SettingsIcon />
+
       </Button>
       <Modal open={open} onClose={handleClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
         <Box sx={style}>
