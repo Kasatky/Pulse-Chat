@@ -9,12 +9,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ProfilePic}) {
       User.ProfilePic = User.hasOne(ProfilePic, {foreignKey:'id'})
+      User.Chats = User.belongsToMany(Chat, {foreignKey:'userId',through:'UsersChats'})
     }
   }
   User.init(
     {
       name: { type: DataTypes.TEXT, allowNull: false, unique: false },
-      email: { type: DataTypes.TEXT, allowNull: false, unique: true },
+      email: { type: DataTypes.TEXT, allowNull: false, unique: true, onDelete: 'CASCADE'},
       password: { type: DataTypes.TEXT, allowNull: false, unique: false },
     },
     {

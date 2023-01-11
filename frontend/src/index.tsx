@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import { Provider } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -9,11 +10,11 @@ import store from './store';
 const mainTheme = createTheme({
   palette: {
     primary: {
-      main: '#43388b',
+      main: '#296EFF',
       light: '#000000',
     },
     secondary: {
-      main: '#2e2575',
+      main: '#1E1F25',
     },
     error: {
       main: '#b71c1c',
@@ -39,23 +40,27 @@ const mainTheme = createTheme({
     body1: {
       fontSize: '1.2rem',
     },
-    fontFamily: [
-      'Poppins',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
+
+    fontFamily: ['Mada', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"'].join(','),
   },
+  // breakpoints: {
+  //   values: {
+  //     xs: 0, // phone
+  //     sm: 300, // tablets
+  //     md: 600, // small laptop
+  //     lg: 900, // desktop
+  //     xl: 1536, // large screens
+  //   },
+  // },
 });
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <Provider store={store}>
-    <ThemeProvider theme={mainTheme}>
-      <App />
-    </ThemeProvider>
-  </Provider>
+  <BrowserRouter>
+    <Provider store={store}>
+      <ThemeProvider theme={mainTheme}>
+        <App />
+      </ThemeProvider>
+    </Provider>
+  </BrowserRouter>
 );

@@ -1,5 +1,6 @@
 "use strict";
-const { Message, User } = require("../models");
+const { Message, User, Chat } = require("../models");
+
 const bcrypt = require("bcrypt");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -9,11 +10,22 @@ module.exports = {
       { username: "Test", text: "Test" },
     ]);
 
-    await User.create({
+    const firstUser = await User.create({
       name: "Admin",
       email: "Admin",
       password: bcrypt.hashSync("Admin", 10),
     });
+
+    const secondUser = await User.create({
+      name: "User",
+      email: "User",
+      password: bcrypt.hashSync("User", 10),
+    });
+
+    const chat = await Chat.create({name:'1111'})
+
+
+
   },
 
   async down(queryInterface, Sequelize) {

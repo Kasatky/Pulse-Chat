@@ -4,7 +4,7 @@
   "description": "![avatar-1841981409(1)](https://user-images.githubusercontent.com/88902053/209134835-f02969c4-66a6-4807-9d6b-9796a8b668d8.png)\r <h1>Чат на React, NodeJS, Socket</h1>",
   "main": "index.js",
   "scripts": {
-    "postinstall": "cd backend && npm i && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all && cd ../frontend && npm i && DISABLE_ESLINT_PLUGIN=true npm run build",
+    "postinstall": "cd backend && npm i && node db/reset.js && npx sequelize db:seed:all && cd ../frontend && npm i && DISABLE_ESLINT_PLUGIN=true npm run build",
     "start": "cd backend && npm start"
   },
   "repository": {

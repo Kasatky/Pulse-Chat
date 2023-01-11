@@ -1,20 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { useAppDispatch } from '../../../store';
-import User from '../../auth/types/User';
 import { getAllMessages, recieveMessage } from '../MessageSlice';
 import selectAllMessages, { selectCurrentUser } from '../selectors';
 import Message from '../types/Message';
+import UseSocketResult from './types/UseSocketResult';
 
-export default function useSocket(socket: Socket): {
-  user: User | undefined;
-  messages: Message[];
-  sendMessage: (event: React.FormEvent) => void;
-  text: string;
-  setText: React.Dispatch<React.SetStateAction<string>>;
-} {
+const socket = io(window.location.origin, { withCredentials: true });
+
+export default function useSocket(): UseSocketResult {
   const user = useSelector(selectCurrentUser);
+
   const messages = useSelector(selectAllMessages);
 
   const dispatch = useAppDispatch();
@@ -46,7 +43,7 @@ export default function useSocket(socket: Socket): {
       socket.disconnect();
       socket.emit('/messages/disconnect');
     };
-  }, []);
+  }, [dispatch]);
 
-  return { user, messages, sendMessage, text, setText };
+  return { user, messages, sendMessage, text, setText, socket };
 }

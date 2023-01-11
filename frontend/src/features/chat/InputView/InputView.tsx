@@ -1,10 +1,7 @@
-import React from 'react'
-import style from './InputView.module.css'
+import React from "react";
 
 function InputView(): JSX.Element {
-  return (
-    <div className={style.inputView}>InputView</div>
-  )
+  return (<div>InputView</div>)
 }
 
-export default InputView
+export default InputView;
