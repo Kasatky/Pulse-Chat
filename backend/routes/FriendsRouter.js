@@ -6,6 +6,7 @@ chatsRouter.post('/', async (req, res) => {
   try {
     const { user } = res.locals;
 
+
     if (user) {
       const userWithChats = await User.findByPk(user.id, { include: { all: true, nested: true } });
 
@@ -25,13 +26,10 @@ chatsRouter.post('/', async (req, res) => {
 chatsRouter.post('/add', async (req, res) => {
   try {
     const { user } = res.locals;
-    console.log(user.name, 8888888888888888888);
 
     const { id } = req.body;
-    console.log(id, 777777777777777);
 
-    const secondUser = await User.findByPk(id);
-    console.log(secondUser);
+    const secondUser = await User.findByPk(id);;
 
     // const allChat = await Chat.findAll();
     // const name = allChat.map((el) => el.name);
@@ -39,6 +37,7 @@ chatsRouter.post('/add', async (req, res) => {
     // const status = name.find(secondUser.name);
     // console.log(status);
     // // if (allChat) {
+    
       const chat = await Chat.create({ name: secondUser.name });
       await chat.addUser(user, { through: 'UsersChats' });
       await chat.addUser(secondUser, { through: 'UsersChats' });
