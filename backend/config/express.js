@@ -6,6 +6,7 @@ const path = require("path");
 const getUser = require("../middlewares/getUser");
 const sharedsession = require("express-socket.io-session");
 const sessionMiddleware = session(sessionConfig);
+const { User } = require("../db/models");
 
 function expressConfig(app, io) {
   app.use(express.urlencoded({ extended: true }));
@@ -21,7 +22,35 @@ function expressConfig(app, io) {
       autoSave: true,
     })
     );
-    
+
+  io.use((socket, next) => {
+  if (socket.handshake.session.userId) {
+  
+
+
+  socket.userId = socket.handshake.session.userId;
+  
+  promiseUser = new Promise((resolve, reject) => {  
+    resolve(User.findByPk(socket.userId))
+  });
+
+  promiseUser.then((user) =>{
+    if(user){
+      socket.user = user;
+      socket.isAuthenicated = true;
+
+      next()
+    }
+    else next(new Error("User not found"))
+  }
+  )
+  
+  
+  } else {
+    next(new Error("unauthorized"))
+  }
+});
+  
     
 
   app.use(express.static(path.join(__dirname, "../../frontend/build")));

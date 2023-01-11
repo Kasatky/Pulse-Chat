@@ -13,7 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../store';
-import { resetSearch, searchUsersThunk } from './SearchSlice';
+import { searchUsersThunk } from './SearchSlice';
 import { foundUsersSelector } from './selectors';
 import FoundUserView from './FoundUserView';
 
@@ -27,7 +27,7 @@ export default function UserSearch(): JSX.Element {
 
   const handleClose = (): void => {
     setOpen(false);
-    dispatch(resetSearch());
+    // dispatch(resetSearch());
   };
 
   const results = useSelector(foundUsersSelector);
