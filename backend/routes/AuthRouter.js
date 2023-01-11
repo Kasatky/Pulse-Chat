@@ -6,13 +6,23 @@ authRouter.get("/user", async (req, res) => {
   const { user } = res.locals;
 
   if (user) {
+    if (user.ProfilePic) {
+      res.json({
+        isLoggedIn: true,
+        user: {
+          id: user.id,
+          name: user.name,
+          image: user.ProfilePic.fileName,
+        },
+      });
+    } else{
     res.json({
       isLoggedIn: true,
       user: {
         id: user.id,
         name: user.name,
       },
-    });
+    })}
   } else {
     res.json({ isLoggedIn: false, user: undefined });
   }
@@ -21,14 +31,17 @@ authRouter.get("/user", async (req, res) => {
 authRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const existingUser = await User.findOne({ where: { email } });
-
+  const existingUser = await User.findOne({ where: { email }, include:{ all: true, nested: true } });
   // проверяем, что такой пользователь есть в БД и пароли совпадают
   if (existingUser && (await bcrypt.compare(password, existingUser.password))) {
-    // кладём id нового пользователя в хранилище сессии (логиним пользователя)
     req.session.userId = existingUser.id;
-    // req.session.user = existingUser;
+    if(existingUser.ProfilePic){
+      const avatar = existingUser.ProfilePic.fileName
+      res.json({ id: existingUser.id, name: existingUser.name, image: avatar });
+    }
     res.json({ id: existingUser.id, name: existingUser.name });
+
+
   } else {
     res
       .status(401)

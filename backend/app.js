@@ -16,6 +16,7 @@ const expressConfig = require("./config/express");
 const { Message, User } = require("./db/models");
 
 const authRouter = require("./routes/AuthRouter");
+const uploadRouter = require("./routes/Upload.Routes");
 
 const searchRouter = require("./routes/SearchRouter");
 
@@ -49,6 +50,7 @@ catch(err){
 expressConfig(app, ioSocket);
 
 app.use("/api/auth", authRouter);
+app.use("/api/uploadFile", uploadRouter);
 
 app.use("/api/search", searchRouter);
 

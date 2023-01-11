@@ -29,12 +29,6 @@ export default function useSocket(
   };
 
   const getSocketId = (): string => socket.id;
-  // useEffect(() => {
-  //   const dd = document.querySelector('.messages');
-  //   if (dd) {
-  //     dd.scrollTo(0, dd.scrollHeight);
-  //   }
-  // }, [messages]);
 
   useEffect(() => {
     if (user) {

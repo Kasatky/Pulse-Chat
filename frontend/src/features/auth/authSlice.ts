@@ -34,7 +34,13 @@ export const logoutThunk = createAsyncThunk('auth/logoutThunk', async () => {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    changeAvatar: ((state, action: PayloadAction<string>) => {
+      if (state.currentUser) {
+        state.currentUser.image = action.payload
+      }
+    })
+  },
   extraReducers: (builder) => {
     builder
 
@@ -80,3 +86,4 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
+export const { changeAvatar } = authSlice.actions

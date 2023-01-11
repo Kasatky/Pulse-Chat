@@ -9,8 +9,8 @@ import Layout from '../features/Layout';
 import { useAppDispatch } from '../store';
 import { userCheckThunk } from '../features/auth/authSlice';
 import ChatPage from '../features/chat/Home/HomePage';
-import { selectCurrentUser } from '../features/chat/selectors';
 import { loadChatsThunk } from '../features/chat/Friends/FriendsSlice';
+import selectCurrentUser from '../features/chat/selectors';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();

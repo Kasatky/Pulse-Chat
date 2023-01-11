@@ -20,7 +20,6 @@ chatsRouter.post('/', async (req, res) => {
     if (user) {
       const userWithChats = await User.findByPk(user.id, { include: { all: true, nested: true } });
 
-
       if (userWithChats) {
         res.json(userWithChats.Chats);
       } else {
@@ -38,8 +37,7 @@ chatsRouter.post('/add', async (req, res) => {
 
     const { id } = req.body;
 
-    const secondUser = await User.findByPk(id);
-
+    const secondUser = await User.findOne({where: id, include:{ all: true, nested: true }} );;
     // const allChat = await Chat.findAll();
     // const name = allChat.map((el) => el.name);
     // console.log(name, 55555);
@@ -50,22 +48,19 @@ chatsRouter.post('/add', async (req, res) => {
       const chat = await Chat.create({ name: secondUser.name });
       await chat.addUser(user, { through: 'UsersChats' });
       await chat.addUser(secondUser, { through: 'UsersChats' });
+    // }
 
     if (user) {
 
       if (chat) {
+        if (secondUser.ProfilePic) {
+        
         const {io} = req.app.locals
-        // const secondUserSocketId = findSocketOfUserFromMap(secondUser.id,io.sockets.sockets)
         
-        // console.log(secondUserSocketId)
-
-        // if(secondUserSocketId){
-          io.to(`User_${secondUser.id}room`).emit('/users/recieveInvite', {name:chat.name,id:chat.id, Messages:[]})
-        // console.log('Успех')}
-        
-        
-        
-        res.json( {name:chat.name, id:chat.id, Messages:[]} );
+        io.to(`User_${secondUser.id}room`).emit('/users/recieveInvite', {name:chat.name,id:chat.id, Messages:[], image: secondUser.ProfilePic.fileName})
+         
+         res.json( {name:chat.name, id:chat.id, Messages:[], image: secondUser.ProfilePic.fileName} );
+        } else io.to(`User_${secondUser.id}room`).emit('/users/recieveInvite', {name:chat.name,id:chat.id, Messages:[]})
       } else {
         res.json([]);
       }
