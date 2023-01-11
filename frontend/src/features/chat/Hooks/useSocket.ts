@@ -22,12 +22,6 @@ export default function useSocket(chatId: number | undefined): UseSocketResult {
     setText('');
   };
 
-  // useEffect(() => {
-  //   const dd = document.querySelector('.messages');
-  //   if (dd) {
-  //     dd.scrollTo(0, dd.scrollHeight);
-  //   }
-  // }, [messages]);
 
   useEffect(() => {
     socket.on('/messages/recieve', (data: Message) => {

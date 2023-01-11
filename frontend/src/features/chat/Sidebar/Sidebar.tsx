@@ -23,25 +23,24 @@ function Sidebar(): JSX.Element {
 
   const groups = ['Billionares club', 'Bates'];
 
-  const messages = [
-    'Hi, girls',
-    'Nice job',
-    'Im glad to see you, sit down please',
-    'i need your ...',
-  ];
+  const messages = ['Hi, girls', 'Nice job', 'Im glad to see you, sit down please', 'i need your ...'];
 
   return (
-    <Box sx={{ backgroundColor: '#212329', height: '100' }}>
+    <Box sx={{ backgroundColor: '#212329', 
+    // height: '100' ,
+    justifyItems: 'stretch',
+  }}>
       <Box
         sx={{
           margin: 4,
           fontSize: 5,
+          display: 'flex',
         }}
       >
         <Typography
-          variant="h4"
-          align="left"
-          sx={{ ml: '1vw', mb: '3vh', color: 'white' }}
+          variant='h4'
+          align='left'
+          sx={{ width: '300px', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         >
           Messages
         </Typography>
@@ -51,9 +50,10 @@ function Sidebar(): JSX.Element {
         sx={{
           width: '100%',
           color: 'white',
+          justifyItems: 'stretch',
 
           opacity: 0.8,
-          mb: '40vh',
+          // mb: '40vh',
         }}
       >
         <Box>
@@ -61,7 +61,7 @@ function Sidebar(): JSX.Element {
         </Box>
 
         <>
-          <Typography align="left" sx={{ ml: '1vw' }}>
+          <Typography align='left' sx={{ ml: '1vw' }}>
             GROUPS
           </Typography>
           <Box
@@ -81,22 +81,30 @@ function Sidebar(): JSX.Element {
           </Box>
         </>
 
-        <>
-          <Typography align="left" sx={{ ml: '1vw', mb: '3vh' }}>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          flex: 1,
+        }}>
+          <Typography align='left' sx={{ ml: '1vw', mb: '3vh' }}>
             DIRECT
           </Typography>
 
           <Box
             sx={{
               width: '100%',
-              height: 30,
+              height: '40vh',
+              overflowY: 'auto',
+              flex: '1 0 auto',
+
               display: 'flex',
               flexDirection: 'column',
             }}
           >
             {chats && chats.map((chat) => <ChatView chat={chat} />)}
           </Box>
-        </>
+        </Box>
       </Box>
       <ModalUserWindow />
       <Button
@@ -106,7 +114,7 @@ function Sidebar(): JSX.Element {
         }}
         disableElevation
         onClick={handleLogout}
-        variant="contained"
+        variant='contained'
       >
         Logout...
       </Button>
