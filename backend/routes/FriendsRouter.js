@@ -10,8 +10,6 @@ chatsRouter.post('/', async (req, res) => {
     if (user) {
       const userWithChats = await User.findByPk(user.id, { include: { all: true, nested: true } });
 
-      console.log(userWithChats.Chats);
-
       if (userWithChats) {
         res.json(userWithChats.Chats);
       } else {
@@ -29,8 +27,7 @@ chatsRouter.post('/add', async (req, res) => {
 
     const { id } = req.body;
 
-    const secondUser = await User.findByPk(id);;
-
+    const secondUser = await User.findOne({where: id, include:{ all: true, nested: true }} );;
     // const allChat = await Chat.findAll();
     // const name = allChat.map((el) => el.name);
     // console.log(name, 55555);
@@ -43,11 +40,11 @@ chatsRouter.post('/add', async (req, res) => {
       await chat.addUser(secondUser, { through: 'UsersChats' });
     // }
 
-    console.log(chat);
-
     if (user) {
       if (chat) {
-        res.json( {name:chat.name, id:chat.id, Messages:[]} );
+        if (secondUser.ProfilePic) {
+          res.json( {name:chat.name, id:chat.id, Messages:[], image: secondUser.ProfilePic.fileName} );
+        } else res.json( {name:chat.name, id:chat.id, Messages:[]} );
       } else {
         res.json([]);
       }
