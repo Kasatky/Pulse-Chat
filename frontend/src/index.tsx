@@ -40,24 +40,17 @@ const mainTheme = createTheme({
       fontSize: '1.2rem',
     },
 
-    fontFamily: [
-      'Mada',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
+    fontFamily: ['Mada', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"'].join(','),
   },
-  breakpoints: {
-    values: {
-      xs: 0, // phone
-      sm: 300, // tablets
-      md: 600, // small laptop
-      lg: 900, // desktop
-      xl: 1536, // large screens
-    },
-
-  },
+  // breakpoints: {
+  //   values: {
+  //     xs: 0, // phone
+  //     sm: 300, // tablets
+  //     md: 600, // small laptop
+  //     lg: 900, // desktop
+  //     xl: 1536, // large screens
+  //   },
+  // },
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);

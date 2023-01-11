@@ -21,3 +21,7 @@
 .sendWrap__btn {
   flex-shrink: 0;
 }
+.mainInput{
+  background-color: gray;
+  
+}
