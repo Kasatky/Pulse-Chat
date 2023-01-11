@@ -9,11 +9,11 @@ import store from './store';
 const mainTheme = createTheme({
   palette: {
     primary: {
-      main: '#43388b',
+      main: '#296EFF',
       light: '#000000',
     },
     secondary: {
-      main: '#2e2575',
+      main: '#1E1F25',
     },
     error: {
       main: '#b71c1c',
