@@ -5,6 +5,7 @@ const sessionConfig = require("./sessionConfig");
 const path = require("path");
 const getUser = require("../middlewares/getUser");
 const sharedsession = require("express-socket.io-session");
+const fileUpload = require('express-fileupload')
 const sessionMiddleware = session(sessionConfig);
 
 const wrap = expressMiddleware => (socket, next) =>
@@ -26,7 +27,7 @@ function expressConfig(app, io) {
   // io.use((socket, next)=> {
   //     sessionMiddleware(socket.request, socket.request.res, next);
   // });
-
+  app.use(fileUpload({createParentPath:true}))
 
   app.use(express.static(path.join(__dirname, "../../frontend/build")));
 

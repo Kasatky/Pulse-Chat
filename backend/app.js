@@ -16,6 +16,7 @@ const expressConfig = require("./config/express");
 const { Message, User } = require("./db/models");
 
 const authRouter = require("./routes/AuthRouter");
+const uploadRouter = require("./routes/Upload.Routes");
 
 const server = http.createServer(app);
 
@@ -30,6 +31,7 @@ const ioSocket = new io.Server(server, {
 expressConfig(app, ioSocket);
 
 app.use("/api/auth", authRouter);
+app.use("/api/uploadFile", uploadRouter);
 
 
 ioSocket.on("connection", async (socket) => {

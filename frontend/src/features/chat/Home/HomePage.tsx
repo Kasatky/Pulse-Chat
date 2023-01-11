@@ -5,6 +5,7 @@ import CompanionMessageView from '../MessageView/CompanionMessageView';
 import './HomePage.css';
 import UserMessageView from '../MessageView/UserMessageView';
 import useSocket from '../Hooks/useSocket';
+import UploadFile from '../UploadFile/UploadFile';
 
 function HomePage(): JSX.Element {
   const socket: Socket = useMemo(
@@ -57,6 +58,7 @@ function HomePage(): JSX.Element {
             variant="standard"
             className="sendWrap__input"
           />
+          <UploadFile />
           <Button type="submit" variant="contained" className="sendWrap__btn">
             Send
           </Button>
