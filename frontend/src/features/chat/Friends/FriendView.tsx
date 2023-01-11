@@ -1,11 +1,16 @@
 import { Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Chat from './types/Chat';
 
 type ChatViewProps = { chat: Chat };
 
 function ChatView({ chat }: ChatViewProps): JSX.Element {
+  const navigate = useNavigate();
+  const handleChatChange = (): void => {
+    navigate(`/chats/${chat.id}`);
+  };
   return (
     <Box
       sx={{
@@ -23,7 +28,7 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
           >
             {chat.name[0]}
           </Avatar>
-          <Typography>{chat.name}</Typography>
+          <Typography onClick={handleChatChange}>{chat.name}</Typography>
         </>
       )}
     </Box>
