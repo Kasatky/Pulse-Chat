@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+const path = require("path");
+
 const { PORT } = process.env;
 
 const express = require("express");
@@ -48,16 +50,16 @@ const ioSocket = new io.Server(server, {
 
 expressConfig(app, ioSocket);
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-});
-
 app.use("/api/auth", authRouter);
 app.use("/api/uploadFile", uploadRouter);
 
 app.use("/api/search", searchRouter);
 
 app.use("/api/friends", friendsRouter);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
 
 app.locals.io = ioSocket;
 
