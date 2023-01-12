@@ -10,7 +10,6 @@
     "start": "node app.js",
     "dbr": "npx sequelize db:drop && npx sequelize db:create && node db/sync.js && npx sequelize db:seed:all",
     "dbr2": "node db/reset.js"
-
   },
   "repository": {
     "type": "git"

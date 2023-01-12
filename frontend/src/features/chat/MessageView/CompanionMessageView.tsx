@@ -1,12 +1,14 @@
 import { Card, Typography } from "@mui/material";
 import React from "react";
 import Message from "../types/Message";
+import ImageView from "../ImageView/ImageView";
 
 type MessageViewProps = {
   message: Message;
 };
 
 function CompanionMessageView({ message }: MessageViewProps): JSX.Element {
+
   return (
     <Card
       sx={{
@@ -49,6 +51,7 @@ function CompanionMessageView({ message }: MessageViewProps): JSX.Element {
       >
         {message.text}
       </Typography>
+      {message.imageLink && <ImageView msgImg={message.imageLink} />}
     </Card>
   );
 }

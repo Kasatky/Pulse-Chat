@@ -22,10 +22,22 @@ export default function useSocket(
 
   const [text, setText] = useState("");
 
-  const sendMessage = (event: React.FormEvent): void => {
+  const sendMessage = async (event: React.FormEvent, file: any): Promise<void> => {
     event.preventDefault();
-    socket.emit("/messages/send", JSON.stringify({ text, chatId }));
+
+    if (file) {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const res = await fetch('/api/upload/MsgImg', {
+        method: 'POST',
+        body: formData
+      })
+      const imageUrl = await res.json()
+      socket.emit("/messages/send", JSON.stringify({ text, chatId, imageLink: imageUrl }));
+    } else socket.emit("/messages/send", JSON.stringify({ text, chatId }));
     setText("");
+    // setFile("")
   };
 
   const getSocketId = (): string => socket.id;

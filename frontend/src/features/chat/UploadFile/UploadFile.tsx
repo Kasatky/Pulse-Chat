@@ -12,7 +12,7 @@ export default function UploadFile(): JSX.Element {
 		const formData = new FormData()
 		formData.append('file', event.target.files![0])
 
-		const res = await fetch('/api/uploadFile', {
+		const res = await fetch('/api/upload/avatar', {
 			method: 'POST',
 			body: formData
 		})
