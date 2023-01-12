@@ -41,7 +41,13 @@ const mainTheme = createTheme({
       fontSize: '1.2rem',
     },
 
-    fontFamily: ['Mada', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"'].join(','),
+    fontFamily: [
+      'Mada',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
   },
   // breakpoints: {
   //   values: {
@@ -54,7 +60,9 @@ const mainTheme = createTheme({
   // },
 });
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 root.render(
   <BrowserRouter>
     <Provider store={store}>
