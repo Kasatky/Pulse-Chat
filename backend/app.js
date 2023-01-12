@@ -16,6 +16,7 @@ const expressConfig = require("./config/express");
 const { Message, User } = require("./db/models");
 
 const authRouter = require("./routes/AuthRouter");
+
 const uploadRouter = require("./routes/Upload.Routes");
 
 const searchRouter = require("./routes/SearchRouter");
@@ -60,6 +61,7 @@ app.locals.io = ioSocket;
 
 ioSocket.on("connection", async (socket) => {
   try{
+
   socket.join(`User_${socket.userId}room`)
 
   app.locals.io = ioSocket;

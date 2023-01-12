@@ -22,13 +22,11 @@ function expressConfig(app, io) {
     sharedsession(sessionMiddleware, {
       autoSave: true,
     })
-    );
+  );
 
   io.use((socket, next) => {
   if (socket.handshake.session.userId) {
   
-
-
   socket.userId = socket.handshake.session.userId;
   
   promiseUser = new Promise((resolve, reject) => {  
