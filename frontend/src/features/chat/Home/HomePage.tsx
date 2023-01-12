@@ -51,11 +51,13 @@ function ChatPage(): JSX.Element {
       >
         <Box
           id={`chatBox${currentChat?.id}`}
-          className="messages"
+          className='messages'
           sx={{
             position: 'relative',
-            padding: '40px',
-            height: 0,
+            padding: { xs: '10px', sm: '40px', md: '40px', lg: '40px', xl: '40px' },
+            height: { xs: '80vh', sm: 'none', md: 'none', lg: 'none', xl: 'none' },
+
+            // display:'flex',
             flex: '1 0 auto',
             width: '100%',
             overflowY: 'auto',
@@ -80,8 +82,7 @@ function ChatPage(): JSX.Element {
           sx={{
             padding: '10px 30px',
             backgroundColor: 'gray',
-            height: '8vh',
-            minHeight: '',
+            height: { xs: '10vh', sm: 'auto', md: 'auto', lg: 'auto', xl: 'auto' },
           }}
         >
           <Box
@@ -91,20 +92,20 @@ function ChatPage(): JSX.Element {
               alignItems: 'center',
               border: '1px solid black',
               borderRadius: '70px',
-              padding: '5px 50px 5px 50px',
+              padding: { xs: '0px 5px 0px 0px', sm: '0px 50px 5px 50px', md: '0px 50px 5px 50px', lg: '0px 50px 5px 50px', xl: '0px 50px 5px 50px' },
               backgroundColor: '#1e1f25',
             }}
           >
             <TextField
-              sx={{ padding: 1, margin: 1, input: { color: 'white' } }}
+              sx={{ padding: '5px', margin: 1, input: { color: 'white' } }}
               value={text}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setText(event.target.value);
               }}
-              name="text"
-              autoComplete="off"
-              variant="standard"
-              className="sendWrap__input"
+              name='text'
+              autoComplete='off'
+              variant='standard'
+              className='sendWrap__input'
             />
             <Button
               sx={{
@@ -113,15 +114,11 @@ function ChatPage(): JSX.Element {
                 height: '50px',
                 minWidth: '0px',
               }}
-              type="submit"
-              variant="contained"
-              className="sendWrap__btn"
+              type='submit'
+              variant='contained'
+              className='sendWrap__btn'
             >
-              <img
-                style={{ height: 30 }}
-                src="https://cdn-icons-png.flaticon.com/512/9068/9068203.png"
-                alt="fly"
-              />
+              <img style={{ height: 30 }} src='https://cdn-icons-png.flaticon.com/512/9068/9068203.png' alt='fly' />
             </Button>
           </Box>
         </Box>

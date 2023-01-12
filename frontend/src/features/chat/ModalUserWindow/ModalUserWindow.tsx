@@ -6,12 +6,19 @@ import Modal from '@mui/material/Modal';
 import { Avatar, TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
 import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 import UploadFile from '../UploadFile/UploadFile';
 import selectCurrentUser from '../selectors';
+import { logoutThunk } from '../../auth/authSlice';
+import { useAppDispatch } from '../../../store';
 
 function ModalUserWindow(): JSX.Element {
   const user = useSelector(selectCurrentUser);
 
+  const dispatch = useAppDispatch();
+  const handleLogout = (): void => {
+    dispatch(logoutThunk());
+  };
 
   const style = {
     position: 'absolute' as 'absolute',
@@ -19,11 +26,11 @@ function ModalUserWindow(): JSX.Element {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 500,
-    bgcolor: 'background.paper',
+    bgcolor: '#E0E0E0',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-    height: 500,
+    height: 600,
     borderRadius: 10,
     display: 'flex',
     // justifyContent: "flex-start",
@@ -54,6 +61,7 @@ function ModalUserWindow(): JSX.Element {
       </Button>
       <Modal open={open} onClose={handleClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
         <Box sx={style}>
+          
           <Typography id='modal-modal-title' variant='h6' component='h2'>
             Edit profile
             <UploadFile />
@@ -87,9 +95,30 @@ function ModalUserWindow(): JSX.Element {
                 onChange={handleNicknameChange}
               />
               <TextField fullWidth label='Bio' id='fullWidth' />
-              <Button type='submit' sx={{ marginTop: 5, marginBottom: 5 }} variant='contained'>
+              
+              <Box sx={{
+                display:'flex',
+                flexDirection: 'column',
+                alignItems: "center",
+                
+              }}>
+              <Button type='submit' sx={{ marginTop: 5, marginBottom: 5, width: '40%' }} variant='contained'>
                 Save
               </Button>
+        <Button
+        sx={{
+          // width: '100%',
+          // height: '3vh',
+          marginTop: 5,
+
+        }}
+        disableElevation
+        onClick={handleLogout}
+        variant="contained"
+      >
+        <LogoutIcon />
+      </Button>
+      </Box>
             </form>
           </Typography>
         </Box>

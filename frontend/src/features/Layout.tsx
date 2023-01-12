@@ -11,45 +11,29 @@ function Layout(): JSX.Element {
   const loading = useSelector(selectLoading);
   return (
     <>
-      {/* <Box
-         className="main"
-         
-        sx={{
-          
-          maxWidth: "md",
-          hegiht: '100%',
-          display: 'flex',
-          margin: '7vh 10vw',
-          borderRadius: 8,
-          overflow: 'hidden',
-        }} 
-      >
-        {loading ? <Loading /> : authCheckd ? <Sidebar /> :
-         <Box  sx={{
-          
-          hegiht: '100%',
-          display: 'flex',
-          margin: '7vh 10vw',
-          borderRadius: 8,
-          overflow: 'hidden',
-        }}  > <Auth /> </Box> }
-        {authCheckd && <Outlet /> }
-        
-      </Box> */}
-
+      {}
       {loading ? (
         <Loading />
       ) : authCheckd ? (
         <Box
-          className="main"
+          className='main'
           sx={{
             maxWidth: 'xs',
-            // hegiht: "100%",
-
             display: 'flex',
-            margin: '2vh 8vw',
+            flexDirection: {
+              xs: 'column',
+              sm: 'row',
+              md: 'row',
+              lg: 'row',
+            },
             borderRadius: 8,
             overflow: 'hidden',
+            margin: {
+              xs: '0px 5px',
+              sm: '2vh 2vw',
+              md: '2vh 8vw',
+              lg: '2vh 8vw',
+            },
           }}
         >
           <Sidebar />
@@ -58,25 +42,24 @@ function Layout(): JSX.Element {
       ) : (
         <Box
           sx={{
-            display: 'flex',
-            justifyItems: 'center',
-            alignItems: 'center',
-            p: 25,
-            backgroundColor: 'secondary.main',
+            m: '60px 25px',
+            // display: 'flex',
+            // justifyContent: 'center',
+            // alignItems: 'center',
+            // backgroundColor: 'secondary.main',
           }}
         >
           <Box
-            className="main"
+            className='main'
             sx={{
-              minWidth: 'md',
-
-              // hegiht: "100%",
-              display: 'flex',
-              m: 'auto',
-              my: 'auto',
               backgroundColor: '#E0E0E0',
               borderRadius: 8,
-              overflow: 'hidden',
+              // minWidth: 'md',
+              // mt: 'auto',
+              // hegiht: "100%",
+              // display: 'flex',
+              // my: 'auto',
+              // overflow: 'hidden',
             }}
           >
             <Auth />

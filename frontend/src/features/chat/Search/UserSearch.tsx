@@ -99,7 +99,7 @@ export default function UserSearch(): JSX.Element {
       </form>
       <Dialog
         PaperProps={{
-          style: { borderRadius: 20 },
+          style: { borderRadius: 20, width: 600 },
         }}
         open={open}
         fullWidth
@@ -110,10 +110,11 @@ export default function UserSearch(): JSX.Element {
           sx={{
             height: '70vh',
             display: 'flex',
-            borderRadius: '10',
+            // borderRadius: '30',
             alignContent: 'center',
             '&::-webkit-scrollbar': {
               display: 'none',
+              
             },
           }}
         >
