@@ -8,7 +8,9 @@
     "dev": "nodemon app.js -e js,jsx,css,json --ignore sessions",
     "build": "node db/sync.js",
     "start": "node app.js",
-    "dbr": "npx sequelize db:drop && npx sequelize db:create && node db/sync.js && npx sequelize db:seed:all"
+    "dbr": "npx sequelize db:drop && npx sequelize db:create && node db/sync.js && npx sequelize db:seed:all",
+    "dbr2": "node db/reset.js"
+
   },
   "repository": {
     "type": "git"
