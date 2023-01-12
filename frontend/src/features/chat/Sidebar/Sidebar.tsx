@@ -50,14 +50,13 @@ function Sidebar(): JSX.Element {
             width: 70,
             margin: 'auto'
         }}>
-
           <img  src={logo} alt="logo" width={45} />
           </Box>
         <Typography
           variant='h3'
           align='left'
           sx={{
-            // fontSize: '2rem',
+            
             width: '300px',
             minWidth: 100,
             color: 'white',
