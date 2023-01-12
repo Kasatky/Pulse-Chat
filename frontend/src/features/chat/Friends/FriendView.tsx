@@ -9,6 +9,7 @@ type ChatViewProps = { chat: Chat };
 function ChatView({ chat }: ChatViewProps): JSX.Element {
   const navigate = useNavigate();
   const handleChatChange = (): void => {
+    console.log(chat);
     navigate(`/chats/${chat.id}`);
   };
   return (
@@ -24,6 +25,8 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
         <>
           <Avatar
             onClick={handleChatChange}
+            src={`/img/${chat?.image}`}
+            alt={chat.name}
             sx={{
               margin: 2,
               cursor: 'pointer',

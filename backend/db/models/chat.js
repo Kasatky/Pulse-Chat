@@ -15,15 +15,20 @@ module.exports = (sequelize, DataTypes) => {
       Chat.Messages = Chat.hasMany(Message, { foreignKey: "chatId" });
     }
   }
-  Chat.init(
-    {
-      name: { type: DataTypes.TEXT, allowNull: false },
-      name: DataTypes.TEXT,
+  Chat.init({
+    name: {type:DataTypes.TEXT,
+      allowNull: false,
     },
-    {
-      sequelize,
-      modelName: "Chat",
-    }
-  );
+    user1Id: {type:DataTypes.INTEGER,
+      allowNull: false,
+    },
+    user2Id: {type:DataTypes.INTEGER,
+      allowNull: false,
+    },
+
+  }, {
+    sequelize,
+    modelName: 'Chat',
+  });
   return Chat;
 };

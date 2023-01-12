@@ -1,6 +1,6 @@
 import Chat from './types/Chat';
 
-export default async function addFriend(id: number): Promise<Chat> {
+export default async function addFriend(id: number): Promise<Chat | []> {
   const response = await fetch('/api/friends/add', {
     method: 'POST',
     body: JSON.stringify({ id }),
