@@ -9,20 +9,18 @@ function Auth(): JSX.Element {
   const error = useSelector(errorSelector);
   const [viewLogin, setViewLogin] = useState(true);
   return (
-    <Container component="main" maxWidth="xs" >
+    <Container sx={{ p: 0 }} component='main'>
       {error && <h1>{error}</h1>}
       {viewLogin ? <LoginView /> : <RegistrationView />}
-      <Grid container justifyContent="center" >
+      <Grid container justifyContent='center'>
         <Grid item>
           <Link
             onClick={() => {
               setViewLogin((prev) => !prev);
             }}
-            variant="body2"
+            variant='body2'
           >
-            {viewLogin
-              ? 'Don`t have an account? Sign Up'
-              : 'Already have an account? Sign in'}
+            {viewLogin ? 'Don`t have an account? Sign Up' : 'Already have an account? Sign in'}
           </Link>
         </Grid>
       </Grid>
