@@ -2,6 +2,7 @@ import { Box } from '@mui/system';
 import React, { memo } from 'react';
 import {  Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
+import logo from './chat.png'
 
 // import SearchView from './SearchView';
 
@@ -44,7 +45,14 @@ function Sidebar(): JSX.Element {
           display: 'flex',
           justifyContent: 'center',
         }}
-      >
+        >
+          <Box sx={{
+            width: 70,
+            margin: 'auto'
+        }}>
+
+          <img  src={logo} alt="logo" width={45} />
+          </Box>
         <Typography
           variant='h3'
           align='left'
