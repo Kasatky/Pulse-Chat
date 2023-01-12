@@ -1,45 +1,30 @@
-import {
-  Box,
-  Button,
-  Avatar,
-  Container,
-  CssBaseline,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { useCallback, useState } from "react";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useSelector } from "react-redux";
-import { logInUserThunk } from "./authSlice";
-import { useAppDispatch } from "../../store";
+import { Box, Button, Avatar, Container, CssBaseline, Grid, TextField, Typography } from '@mui/material';
+import { useCallback, useState } from 'react';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useSelector } from 'react-redux';
+import { logInUserThunk } from './authSlice';
+import { useAppDispatch } from '../../store';
 
 // import { useState } from 'react';
 // import LoginView from './LoginView';
-import { errorSelector } from "./selectors";
+import { errorSelector } from './selectors';
 
 function Auth(): JSX.Element {
   const error = useSelector(errorSelector);
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
 
   const dispatch = useAppDispatch();
 
-  const handleEmailChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      setEmail(event.target.value);
-    },
-    []
-  );
+  const handleEmailChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
+    setEmail(event.target.value);
+  }, []);
 
-  const handlePasswordChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      setPassword(event.target.value);
-    },
-    []
-  );
+  const handlePasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
+    setPassword(event.target.value);
+  }, []);
 
   const handleLogin = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -47,28 +32,21 @@ function Auth(): JSX.Element {
   };
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      sx={{
-        display: "flex",
-      }}
-    >
+    <Container component='main' maxWidth='xs'>
       {error && <h1>{error}</h1>}
 
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
         <form noValidate onSubmit={handleLogin}>
@@ -76,16 +54,16 @@ function Auth(): JSX.Element {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  color="primary"
+                  color='primary'
                   onChange={handleEmailChange}
                   value={email}
-                  name="email"
+                  name='email'
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  variant="outlined"
-                  autoComplete="email"
+                  id='email'
+                  label='Email Address'
+                  variant='outlined'
+                  autoComplete='email'
                 />
               </Grid>
               <Grid item xs={12}>
@@ -94,20 +72,15 @@ function Auth(): JSX.Element {
                   onChange={handlePasswordChange}
                   required
                   fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  name='password'
+                  label='Password'
+                  type='password'
+                  id='password'
+                  autoComplete='new-password'
                 />
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
               Sign in
             </Button>
           </Box>
