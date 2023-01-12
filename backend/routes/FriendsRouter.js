@@ -22,7 +22,7 @@ chatsRouter.post('/', async (req, res) => {
       
       const correctedChats = await userWithChats.Chats.map(async(chat)=>{
         const secondUser = await chat.user1Id === user.id ? await User.findByPk(chat.user2Id,{include:{ all: true, nested: true }})  : await User.findByPk(chat.user1Id,{include:{ all: true, nested: true }}) 
-        return { name:secondUser.name, chatId:chat.id, Messages:chat.Messages, image:secondUser.ProfilePic?.fileName}
+        return { name:secondUser.name, id:(chat.id), Messages:chat.Messages, image:secondUser.ProfilePic?.fileName}
       })
       
       if (userWithChats) {

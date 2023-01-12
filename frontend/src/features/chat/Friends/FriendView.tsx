@@ -9,6 +9,7 @@ type ChatViewProps = { chat: Chat };
 function ChatView({ chat }: ChatViewProps): JSX.Element {
   const navigate = useNavigate();
   const handleChatChange = (): void => {
+    console.log(chat);
     navigate(`/chats/${chat.id}`);
   };
   return (
