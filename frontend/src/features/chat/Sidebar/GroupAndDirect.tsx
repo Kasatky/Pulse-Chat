@@ -2,9 +2,9 @@ import { Avatar } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 
-type GroupProps = { item: string; message: string };
+type GroupProps = { item: string};
 
-function GroupAndDirect({ item, message }: GroupProps): JSX.Element {
+function GroupAndDirect({ item }: GroupProps): JSX.Element {
   return (
     <Box
       sx={{
@@ -44,12 +44,11 @@ function GroupAndDirect({ item, message }: GroupProps): JSX.Element {
             marginBottom: 1,
             fontWeight: 600,
           cursor: 'pointer',
-
           }}
         >
           {item}
         </Box>
-        {message.length > 30 ? <div>{message.slice(0, 30)} ...</div> : <div>{message}</div>}
+        {/* {message.length > 30 ? <div>{message.slice(0, 30)} ...</div> : <div>{message}</div>} */}
       </Box>
     </Box>
   );

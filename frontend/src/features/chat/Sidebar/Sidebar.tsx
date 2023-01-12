@@ -1,9 +1,10 @@
 import { Box } from '@mui/system';
 import React, { memo } from 'react';
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 // import SearchView from './SearchView';
+
 import allChatsSelector from '../Friends/selectors';
 import ChatView from '../Friends/FriendView';
 import ModalUserWindow from '../ModalUserWindow/ModalUserWindow';
@@ -11,12 +12,7 @@ import ModalUserWindow from '../ModalUserWindow/ModalUserWindow';
 import UserSearch from '../Search/UserSearch';
 
 function Sidebar(): JSX.Element {
-
   const chats = useSelector(allChatsSelector);
-
-  // const groups = ['Billionares club', 'Bates'];
-
-  // const messages = ['Hi, girls', 'Nice job', 'Im glad to see you, sit down please', 'i need your ...'];
 
   return (
     <Box
@@ -33,7 +29,6 @@ function Sidebar(): JSX.Element {
         display: 'flex',
         height: { xs: '10vh', sm: 'none', md: 'none', lg: 'none', xl: 'none' },
         minWidth: 400,
-        // justifyItems: 'stretch',
       }}
     >
       <Box
@@ -65,8 +60,11 @@ function Sidebar(): JSX.Element {
         >
           Pulse
         </Typography>
-      </Box>
+        <Box sx={{marginTop: 2}}>
 
+        <ModalUserWindow />
+        </Box>
+      </Box>
       <Box
         sx={{
           width: '100%',
@@ -87,28 +85,6 @@ function Sidebar(): JSX.Element {
         <Box>
           <UserSearch />
         </Box>
-
-        {/* <>
-          <Typography align='left' sx={{ ml: '1vw' }}>
-            GROUPS
-          </Typography>
-          <Box
-            sx={{
-              width: '100%',
-
-              // height: 130,
-              display: 'flex',
-              flexDirection: 'column',
-
-              mb: 10,
-            }}
-          >
-            {groups.map((el, index) => (
-              <GroupAndDirect key={el.length} item={el} message={messages[index]} />
-            ))}
-          </Box>
-        </> */}
-
         <Box
           sx={{
             display: 'flex',
@@ -117,8 +93,8 @@ function Sidebar(): JSX.Element {
             flex: 1,
           }}
         >
-          <Typography align='left' sx={{ ml: '1vw', mb: '3vh' }}>
-            DIRECT
+          <Typography variant='h5' align="left" sx={{ ml: '1vw', mb: '3vh' }}>
+            Your messages
           </Typography>
 
           <Box
@@ -133,6 +109,9 @@ function Sidebar(): JSX.Element {
               },
               overflowY: 'auto',
               flex: '1 0 auto',
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
               display: 'flex',
               flexDirection: 'column',
             }}
