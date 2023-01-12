@@ -1,42 +1,38 @@
 import { Box } from '@mui/system';
 import React, { memo } from 'react';
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { logoutThunk } from '../../auth/authSlice';
+
 
 // import SearchView from './SearchView';
-import { useAppDispatch } from '../../../store';
+
 import allChatsSelector from '../Friends/selectors';
 import ChatView from '../Friends/FriendView';
 import ModalUserWindow from '../ModalUserWindow/ModalUserWindow';
-import GroupAndDirect from './GroupAndDirect';
+// import GroupAndDirect from './GroupAndDirect';
 import UserSearch from '../Search/UserSearch';
 
 function Sidebar(): JSX.Element {
-  const dispatch = useAppDispatch();
 
-  const handleLogout = (): void => {
-    dispatch(logoutThunk());
-  };
 
   const chats = useSelector(allChatsSelector);
 
-  const groups = ['Billionares club', 'Bates'];
+  // const groups = ['Billionares club', 'Bates'];
 
-  const messages = [
-    'Hi, girls',
-    'Nice job',
-    'Im glad to see you, sit down please',
-    'i need your ...',
-  ];
+  // const messages = [
+  //   'Hi, girls',
+  //   'Nice job',
+  //   'Im glad to see you, sit down please',
+  //   'i need your ...',
+  // ];
 
   return (
     <Box
       sx={{
         backgroundColor: '#212329',
         width: '15vw',
-        minWidth: 160,
-        justifyItems: 'stretch',
+        minWidth: 400,
+        // justifyItems: 'stretch',
       }}
     >
       <Box
@@ -47,28 +43,30 @@ function Sidebar(): JSX.Element {
         }}
       >
         <Typography
-          variant="h4"
+          variant="h3"
           align="left"
           sx={{
-            fontSize: '2rem',
+            // fontSize: '2rem',
             width: '300px',
             minWidth: 100,
             color: 'white',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            // display: 'flex',
+            // justifyContent: 'center',
+            // alignItems: 'center',
           }}
         >
           Pulse
         </Typography>
-      </Box>
+        <Box sx={{marginTop: 2}}>
 
+        <ModalUserWindow />
+        </Box>
+      </Box>
       <Box
         sx={{
           width: '100%',
           color: 'white',
           justifyItems: 'stretch',
-
           opacity: 0.8,
           // mb: '40vh',
         }}
@@ -76,19 +74,16 @@ function Sidebar(): JSX.Element {
         <Box>
           <UserSearch />
         </Box>
-
         <>
-          <Typography align="left" sx={{ ml: '1vw' }}>
+          {/* <Typography align="left" sx={{ ml: '1vw' }}>
             GROUPS
-          </Typography>
-          <Box
+          </Typography> */}
+          {/* <Box
             sx={{
               width: '100%',
-
               // height: 130,
               display: 'flex',
               flexDirection: 'column',
-
               mb: 10,
             }}
           >
@@ -99,9 +94,8 @@ function Sidebar(): JSX.Element {
                 message={messages[index]}
               />
             ))}
-          </Box>
+          </Box> */}
         </>
-
         <Box
           sx={{
             display: 'flex',
@@ -110,8 +104,8 @@ function Sidebar(): JSX.Element {
             flex: 1,
           }}
         >
-          <Typography align="left" sx={{ ml: '1vw', mb: '3vh' }}>
-            DIRECT
+          <Typography variant='h5' align="left" sx={{ ml: '1vw', mb: '3vh' }}>
+            Your messages
           </Typography>
 
           <Box
@@ -120,7 +114,9 @@ function Sidebar(): JSX.Element {
               height: '40vh',
               overflowY: 'auto',
               flex: '1 0 auto',
-
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -130,18 +126,8 @@ function Sidebar(): JSX.Element {
           </Box>
         </Box>
       </Box>
-      <ModalUserWindow />
-      <Button
-        sx={{
-          width: '100%',
-          height: '3vh',
-        }}
-        disableElevation
-        onClick={handleLogout}
-        variant="contained"
-      >
-        Logout...
-      </Button>
+      
+      
     </Box>
   );
 }
