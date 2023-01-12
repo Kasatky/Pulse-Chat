@@ -22,10 +22,6 @@ module.exports = {
       password: bcrypt.hashSync("User", 10),
     });
 
-    const chat = await Chat.create({name:'1111'})
-
-
-
   },
 
   async down(queryInterface, Sequelize) {
