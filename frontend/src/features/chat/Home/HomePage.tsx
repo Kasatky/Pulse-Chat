@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Box, Button, Container, TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+// import EmojiPicker from 'emoji-picker-react';
 import CompanionMessageView from '../MessageView/CompanionMessageView';
 import './HomePage.css';
 import UserMessageView from '../MessageView/UserMessageView';
@@ -51,11 +52,23 @@ function ChatPage(): JSX.Element {
       >
         <Box
           id={`chatBox${currentChat?.id}`}
-          className='messages'
+          className="messages"
           sx={{
             position: 'relative',
-            padding: { xs: '10px', sm: '40px', md: '40px', lg: '40px', xl: '40px' },
-            height: { xs: '80vh', sm: 'none', md: 'none', lg: 'none', xl: 'none' },
+            padding: {
+              xs: '10px',
+              sm: '40px',
+              md: '40px',
+              lg: '40px',
+              xl: '40px',
+            },
+            height: {
+              xs: '80vh',
+              sm: 'none',
+              md: 'none',
+              lg: 'none',
+              xl: 'none',
+            },
 
             // display:'flex',
             flex: '1 0 auto',
@@ -82,7 +95,13 @@ function ChatPage(): JSX.Element {
           sx={{
             padding: '10px 30px',
             backgroundColor: 'gray',
-            height: { xs: '10vh', sm: 'auto', md: 'auto', lg: 'auto', xl: 'auto' },
+            height: {
+              xs: '10vh',
+              sm: 'auto',
+              md: 'auto',
+              lg: 'auto',
+              xl: 'auto',
+            },
           }}
         >
           <Box
@@ -92,7 +111,13 @@ function ChatPage(): JSX.Element {
               alignItems: 'center',
               border: '1px solid black',
               borderRadius: '70px',
-              padding: { xs: '0px 5px 0px 0px', sm: '0px 50px 5px 50px', md: '0px 50px 5px 50px', lg: '0px 50px 5px 50px', xl: '0px 50px 5px 50px' },
+              padding: {
+                xs: '0px 5px 0px 0px',
+                sm: '0px 50px 5px 50px',
+                md: '0px 50px 5px 50px',
+                lg: '0px 50px 5px 50px',
+                xl: '0px 50px 5px 50px',
+              },
               backgroundColor: '#1e1f25',
             }}
           >
@@ -102,10 +127,10 @@ function ChatPage(): JSX.Element {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setText(event.target.value);
               }}
-              name='text'
-              autoComplete='off'
-              variant='standard'
-              className='sendWrap__input'
+              name="text"
+              autoComplete="off"
+              variant="standard"
+              className="sendWrap__input"
             />
             <Button
               sx={{
@@ -114,12 +139,17 @@ function ChatPage(): JSX.Element {
                 height: '50px',
                 minWidth: '0px',
               }}
-              type='submit'
-              variant='contained'
-              className='sendWrap__btn'
+              type="submit"
+              variant="contained"
+              className="sendWrap__btn"
             >
-              <img style={{ height: 30 }} src='https://cdn-icons-png.flaticon.com/512/9068/9068203.png' alt='fly' />
+              <img
+                style={{ height: 30 }}
+                src="https://cdn-icons-png.flaticon.com/512/9068/9068203.png"
+                alt="fly"
+              />
             </Button>
+            {/* <EmojiPicker /> */}
           </Box>
         </Box>
       </form>
