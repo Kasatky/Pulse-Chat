@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
 import React, { memo } from 'react';
-import { Typography } from '@mui/material';
+import {  Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 // import SearchView from './SearchView';
@@ -27,7 +27,7 @@ function Sidebar(): JSX.Element {
           xl: '15vw',
         },
         display: 'flex',
-        height: { xs: '10vh', sm: 'none', md: 'none', lg: 'none', xl: 'none' },
+        height: { xs: '10vh', sm: 'auto', md: 'auto', lg: 'auto', xl: 'auto' },
         minWidth: 400,
       }}
     >
@@ -102,10 +102,10 @@ function Sidebar(): JSX.Element {
               width: '100%',
               height: {
                 xs: '80vh',
-                sm: '40vh',
-                md: '40vh',
-                lg: '40vh',
-                xl: '40vh',
+                sm: 'auto',
+                md: 'auto',
+                lg: 'auto',
+                xl: 'auto',
               },
               overflowY: 'auto',
               flex: '1 0 auto',
@@ -119,17 +119,8 @@ function Sidebar(): JSX.Element {
             {chats && chats.map((chat) => <ChatView key={chat.id} chat={chat} />)}
           </Box>
         </Box>
-        <ModalUserWindow />
-        <Button
-          sx={{
-            width: '100%',
-            height: '3vh',
-          }}
-          disableElevation
-          variant='contained'
-        >
-          Logout...
-        </Button>
+       
+        
       </Box>
     </Box>
   );

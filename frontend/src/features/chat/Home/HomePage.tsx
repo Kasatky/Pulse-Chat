@@ -82,7 +82,7 @@ function ChatPage(): JSX.Element {
           sx={{
             padding: '10px 30px',
             backgroundColor: 'gray',
-            height: { xs: '10vh', sm: 'none', md: 'none', lg: 'none', xl: 'none' },
+            height: { xs: '10vh', sm: 'auto', md: 'auto', lg: 'auto', xl: 'auto' },
           }}
         >
           <Box
