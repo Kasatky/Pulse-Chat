@@ -23,13 +23,21 @@ function Sidebar(): JSX.Element {
 
   const groups = ['Billionares club', 'Bates'];
 
-  const messages = ['Hi, girls', 'Nice job', 'Im glad to see you, sit down please', 'i need your ...'];
+  const messages = [
+    'Hi, girls',
+    'Nice job',
+    'Im glad to see you, sit down please',
+    'i need your ...',
+  ];
 
   return (
-    <Box sx={{ backgroundColor: '#212329', 
-    // height: '100' ,
-    justifyItems: 'stretch',
-  }}>
+    <Box
+      sx={{
+        backgroundColor: '#212329',
+        // height: '100' ,
+        justifyItems: 'stretch',
+      }}
+    >
       <Box
         sx={{
           margin: 4,
@@ -38,9 +46,15 @@ function Sidebar(): JSX.Element {
         }}
       >
         <Typography
-          variant='h4'
-          align='left'
-          sx={{ width: '300px', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          variant="h4"
+          align="left"
+          sx={{
+            width: '300px',
+            color: 'white',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
         >
           Messages
         </Typography>
@@ -61,7 +75,7 @@ function Sidebar(): JSX.Element {
         </Box>
 
         <>
-          <Typography align='left' sx={{ ml: '1vw' }}>
+          <Typography align="left" sx={{ ml: '1vw' }}>
             GROUPS
           </Typography>
           <Box
@@ -81,13 +95,15 @@ function Sidebar(): JSX.Element {
           </Box>
         </>
 
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          flex: 1,
-        }}>
-          <Typography align='left' sx={{ ml: '1vw', mb: '3vh' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            flex: 1,
+          }}
+        >
+          <Typography align="left" sx={{ ml: '1vw', mb: '3vh' }}>
             DIRECT
           </Typography>
 
@@ -114,7 +130,7 @@ function Sidebar(): JSX.Element {
         }}
         disableElevation
         onClick={handleLogout}
-        variant='contained'
+        variant="contained"
       >
         Logout...
       </Button>

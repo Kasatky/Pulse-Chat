@@ -52,8 +52,6 @@ function expressConfig(app, io) {
   }
 });
   
-  );
-
   app.use(fileUpload({
     createParentPath:true,
     limits: { fileSize: 50 * 1024 * 1024 },

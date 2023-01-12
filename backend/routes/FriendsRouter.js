@@ -49,18 +49,22 @@ chatsRouter.post('/add', async (req, res) => {
       await chat.addUser(user, { through: 'UsersChats' });
       await chat.addUser(secondUser, { through: 'UsersChats' });
     // }
+    const {io} = req.app.locals
 
     if (user) {
 
       if (chat) {
         if (secondUser.ProfilePic) {
         
-        const {io} = req.app.locals
         
         io.to(`User_${secondUser.id}room`).emit('/users/recieveInvite', {name:chat.name,id:chat.id, Messages:[], image: secondUser.ProfilePic.fileName})
          
-         res.json( {name:chat.name, id:chat.id, Messages:[], image: secondUser.ProfilePic.fileName} );
-        } else io.to(`User_${secondUser.id}room`).emit('/users/recieveInvite', {name:chat.name,id:chat.id, Messages:[]})
+         res.json( {
+          name:chat.name, id:chat.id, Messages:[], image: secondUser.ProfilePic.fileName
+        } );
+        } else {
+          io.to(`User_${secondUser.id}room`).emit('/users/recieveInvite', {name:chat.name,id:chat.id, Messages:[]})
+          res.json( { name:chat.name, id:chat.id, Messages:[]})}
       } else {
         res.json([]);
       }

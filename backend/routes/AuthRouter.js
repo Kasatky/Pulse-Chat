@@ -29,6 +29,7 @@ authRouter.get("/user", async (req, res) => {
 });
 
 authRouter.post("/login", async (req, res) => {
+  try{
   const { email, password } = req.body;
 
   const existingUser = await User.findOne({ where: { email }, include:{ all: true, nested: true } });
@@ -39,20 +40,22 @@ authRouter.post("/login", async (req, res) => {
       const avatar = existingUser.ProfilePic.fileName
       res.json({ id: existingUser.id, name: existingUser.name, image: avatar });
     }
-    res.json({ id: existingUser.id, name: existingUser.name });
-
-
+     else res.json({ id: existingUser.id, name: existingUser.name });
   } else {
     res
       .status(401)
       .json({ error: "Такого пользователя нет либо пароли не совпадают" });
-  }
-});
+  }}
+  catch(err){
+    res.status(500).json({ error: err })}
+  });
 
 authRouter.post("/logout", (req, res) => {
   req.session.destroy(() => {
     res.json({ success: true });
   });
+
+  res.clearCookie('user_sid')  
 });
 
 authRouter.post("/registration", async (req, res) => {

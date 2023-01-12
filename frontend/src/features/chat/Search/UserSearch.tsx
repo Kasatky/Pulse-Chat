@@ -8,40 +8,39 @@ import {
   DialogContentText,
   IconButton,
   TextField,
-} from "@mui/material";
-import ClearIcon from "@mui/icons-material/Clear";
-import SearchIcon from "@mui/icons-material/Search";
-import React from "react";
-import { useSelector } from "react-redux";
-import { styled, alpha } from "@mui/material/styles";
-import { useAppDispatch } from "../../../store";
-import { resetSearch, searchUsersThunk } from "./SearchSlice";
-import { foundUsersSelector } from "./selectors";
-import FoundUserView from "./FoundUserView";
+} from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
+import SearchIcon from '@mui/icons-material/Search';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { styled, alpha } from '@mui/material/styles';
+import { useAppDispatch } from '../../../store';
+import { searchUsersThunk } from './SearchSlice';
+import { foundUsersSelector } from './selectors';
+import FoundUserView from './FoundUserView';
 
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
+  '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    width: "auto",
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    width: 'auto',
   },
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
+const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -62,8 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 export default function UserSearch(): JSX.Element {
   const [open, setOpen] = React.useState(false);
-  const [text, setText] = React.useState("");
-  const [input, setInput] = React.useState("");
+  const [text, setText] = React.useState('');
 
   const handleOpen = (): void => setOpen(true);
 
@@ -78,20 +76,27 @@ export default function UserSearch(): JSX.Element {
 
   const handleSearch = (event: React.FormEvent): void => {
     event.preventDefault();
+    setOpen(true);
     dispatch(searchUsersThunk(text));
   };
 
   return (
-    <div>
-      
-      <Search onClick={handleOpen}  >
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase  placeholder='Search…' inputProps={{ 'aria-label': 'search'}} onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setInput(event.target.value);
-                  }}/>
-      </Search>
+    <>
+      <form onSubmit={handleSearch}>
+        <Search onSubmit={handleOpen}>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            value={text}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setText(event.target.value);
+            }}
+            placeholder="Search…"
+            inputProps={{ 'aria-label': 'search' }}
+          />
+        </Search>
+      </form>
       <Dialog
         PaperProps={{
           style: { borderRadius: 20 },
@@ -103,12 +108,12 @@ export default function UserSearch(): JSX.Element {
       >
         <DialogContent
           sx={{
-            height: "70vh",
-            display: "flex",
-            borderRadius: "10",
-            alignContent: "center",
-            "&::-webkit-scrollbar": {
-              display: "none",
+            height: '70vh',
+            display: 'flex',
+            borderRadius: '10',
+            alignContent: 'center',
+            '&::-webkit-scrollbar': {
+              display: 'none',
             },
           }}
         >
@@ -117,7 +122,7 @@ export default function UserSearch(): JSX.Element {
               <Grid
                 container
                 spacing={2}
-                sx={{ mt: 1, ml: "auto", mr: "auto" }}
+                sx={{ mt: 1, ml: 'auto', mr: 'auto' }}
                 xs={12}
               >
                 <TextField
@@ -125,14 +130,13 @@ export default function UserSearch(): JSX.Element {
                   sx={{
                     margin: 1,
                     width: 1,
-                    "& .Mui-focused .MuiIconButton-root": {
-                      color: "primary.main",
+                    '& .Mui-focused .MuiIconButton-root': {
+                      color: 'primary.main',
                     },
                   }}
                   fullWidth
                   size="small"
                   value={text}
-                  defaultValue={input}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setText(event.target.value);
                   }}
@@ -143,8 +147,8 @@ export default function UserSearch(): JSX.Element {
                       <IconButton
                         sx={{
                           ml: -1.5,
-                          "&:hover": {
-                            backgroundColor: "#FFF",
+                          '&:hover': {
+                            backgroundColor: '#FFF',
                           },
                         }}
                         type="button"
@@ -156,8 +160,8 @@ export default function UserSearch(): JSX.Element {
                     ),
                     endAdornment: (
                       <IconButton
-                        sx={{ visibility: text ? "visible" : "hidden" }}
-                        onClick={() => setText("")}
+                        sx={{ visibility: text ? 'visible' : 'hidden' }}
+                        onClick={() => setText('')}
                       >
                         <ClearIcon />
                       </IconButton>
@@ -170,8 +174,8 @@ export default function UserSearch(): JSX.Element {
                   spacing={2}
                   sx={{
                     mt: 1,
-                    display: "flex",
-                    justifyContent: "center",
+                    display: 'flex',
+                    justifyContent: 'center',
                   }}
                   xs={12}
                 >
@@ -188,6 +192,6 @@ export default function UserSearch(): JSX.Element {
           <Button onClick={handleClose}>Close</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }
