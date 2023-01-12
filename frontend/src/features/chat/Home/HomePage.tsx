@@ -11,12 +11,17 @@ import allChatsSelector from '../Friends/selectors';
 
 function ChatPage(): JSX.Element {
   const { id: chatId } = useParams();
-
   const { user, text, setText, sendMessage } = useSocket(Number(chatId));
-
   const chats = useSelector(allChatsSelector);
-
   const currentChat = chats.find((chat) => chat.id === Number(chatId));
+
+  const [file, setFile] = useState<any>(null) // ANY11111
+  const filePicker = useRef<HTMLInputElement | null>(null)
+
+  const handleSubmit = (event: React.FormEvent): void => {
+    sendMessage(event, file)
+    setFile(null)
+  }
 
   useEffect(() => {
     const dd = document.getElementById(`chatBox${currentChat?.id}`);
@@ -24,6 +29,14 @@ function ChatPage(): JSX.Element {
       dd.scrollTo(0, dd.scrollHeight);
     }
   }, [currentChat?.Messages, currentChat?.id]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setFile(event.target.files![0])
+  }
+
+  const handlePick = (): void => {
+    filePicker.current!.click()
+  }
 
   return (
     <Container
@@ -48,7 +61,7 @@ function ChatPage(): JSX.Element {
           justifyContent: 'space-between',
           flex: 1,
         }}
-        onSubmit={sendMessage}
+        onSubmit={handleSubmit}
       >
         <Box
           id={`chatBox${currentChat?.id}`}
@@ -132,6 +145,15 @@ function ChatPage(): JSX.Element {
               variant="standard"
               className="sendWrap__input"
             />
+            <Box>
+              <button type="button" onClick={handlePick}>📎</button>
+              <input
+                className="hidenInput"
+                type="file"
+                onChange={handleChange}
+                ref={filePicker}
+                accept="image/*.png,.jpg" />
+            </Box>
             <Button
               sx={{
                 borderRadius: '50%',
@@ -158,3 +180,4 @@ function ChatPage(): JSX.Element {
 }
 
 export default ChatPage;
+
