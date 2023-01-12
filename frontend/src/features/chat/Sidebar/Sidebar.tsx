@@ -34,7 +34,8 @@ function Sidebar(): JSX.Element {
     <Box
       sx={{
         backgroundColor: '#212329',
-        // height: '100' ,
+        width: '15vw',
+        minWidth: 160,
         justifyItems: 'stretch',
       }}
     >
@@ -49,14 +50,16 @@ function Sidebar(): JSX.Element {
           variant="h4"
           align="left"
           sx={{
+            fontSize: '2rem',
             width: '300px',
+            minWidth: 100,
             color: 'white',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
           }}
         >
-          Messages
+          Pulse
         </Typography>
       </Box>
 
@@ -90,7 +93,11 @@ function Sidebar(): JSX.Element {
             }}
           >
             {groups.map((el, index) => (
-              <GroupAndDirect item={el} message={messages[index]} />
+              <GroupAndDirect
+                key={el.length}
+                item={el}
+                message={messages[index]}
+              />
             ))}
           </Box>
         </>
@@ -118,7 +125,8 @@ function Sidebar(): JSX.Element {
               flexDirection: 'column',
             }}
           >
-            {chats && chats.map((chat) => <ChatView chat={chat} />)}
+            {chats &&
+              chats.map((chat) => <ChatView key={chat.id} chat={chat} />)}
           </Box>
         </Box>
       </Box>

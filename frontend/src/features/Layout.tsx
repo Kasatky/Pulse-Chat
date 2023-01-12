@@ -1,10 +1,10 @@
-import { Outlet } from "react-router-dom";
-import { Box } from "@mui/system";
-import { useSelector } from "react-redux";
-import Auth from "./auth/Auth";
-import { selectIsLoggedIn, selectLoading } from "./auth/selectors";
-import Sidebar from "./chat/Sidebar/Sidebar";
-import Loading from "../App/Loading";
+import { Outlet } from 'react-router-dom';
+import { Box } from '@mui/system';
+import { useSelector } from 'react-redux';
+import Auth from './auth/Auth';
+import { selectIsLoggedIn, selectLoading } from './auth/selectors';
+import Sidebar from './chat/Sidebar/Sidebar';
+import Loading from '../App/Loading';
 
 function Layout(): JSX.Element {
   const authCheckd = useSelector(selectIsLoggedIn);
@@ -43,13 +43,13 @@ function Layout(): JSX.Element {
         <Box
           className="main"
           sx={{
-            maxWidth: "xs",
+            maxWidth: 'xs',
             // hegiht: "100%",
 
-            display: "flex",
-            margin: "7vh 10vw",
+            display: 'flex',
+            margin: '2vh 8vw',
             borderRadius: 8,
-            overflow: "hidden",
+            overflow: 'hidden',
           }}
         >
           <Sidebar />
@@ -58,25 +58,25 @@ function Layout(): JSX.Element {
       ) : (
         <Box
           sx={{
-            display: "flex",
-            justifyItems: "center",
-            alignItems: "center",
+            display: 'flex',
+            justifyItems: 'center',
+            alignItems: 'center',
             p: 25,
-            backgroundColor: "secondary.main",
+            backgroundColor: 'secondary.main',
           }}
         >
           <Box
             className="main"
             sx={{
-              minWidth: "md",
-            
+              minWidth: 'md',
+
               // hegiht: "100%",
-              display: "flex",
-              m: "auto",
-              my: "auto",
-              backgroundColor: "#E0E0E0",
+              display: 'flex',
+              m: 'auto',
+              my: 'auto',
+              backgroundColor: '#E0E0E0',
               borderRadius: 8,
-              overflow: "hidden",
+              overflow: 'hidden',
             }}
           >
             <Auth />

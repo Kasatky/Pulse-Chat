@@ -83,7 +83,7 @@ export default function UserSearch(): JSX.Element {
   return (
     <>
       <form onSubmit={handleSearch}>
-        <Search onSubmit={handleOpen}>
+        <Search sx={{ mb: 1 }} onSubmit={handleOpen}>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
@@ -123,7 +123,6 @@ export default function UserSearch(): JSX.Element {
                 container
                 spacing={2}
                 sx={{ mt: 1, ml: 'auto', mr: 'auto' }}
-                xs={12}
               >
                 <TextField
                   autoComplete="false"
@@ -172,6 +171,7 @@ export default function UserSearch(): JSX.Element {
                 <Grid
                   container
                   spacing={2}
+                  item
                   sx={{
                     mt: 1,
                     display: 'flex',
