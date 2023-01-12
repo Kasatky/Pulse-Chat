@@ -15,7 +15,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Chat.init({
-    name: DataTypes.TEXT
+    name: {type:DataTypes.TEXT,
+      allowNull: false,
+    },
+    user1Id: {type:DataTypes.INTEGER,
+      allowNull: false,
+    },
+    user2Id: {type:DataTypes.INTEGER,
+      allowNull: false,
+    },
+
   }, {
     sequelize,
     modelName: 'Chat',

@@ -4,7 +4,7 @@ import { io } from 'socket.io-client';
 import { useAppDispatch } from '../../../store';
 import { recieveInvite, recieveMessage } from '../Friends/FriendsSlice';
 import Chat from '../Friends/types/Chat';
-import { selectCurrentUser } from '../selectors';
+import selectCurrentUser from '../selectors';
 import Message from '../types/Message';
 import UseSocketResult from './types/UseSocketResult';
 

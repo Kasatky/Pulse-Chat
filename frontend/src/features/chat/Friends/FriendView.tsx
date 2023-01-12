@@ -24,6 +24,8 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
         <>
           <Avatar
             onClick={handleChatChange}
+            src={`/img/${chat?.image}`}
+            alt={chat.name}
             sx={{
               margin: 2,
               cursor: 'pointer',

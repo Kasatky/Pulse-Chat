@@ -12,6 +12,9 @@ export const addChatThunk = createAsyncThunk(
   '/friends/addChat',
   async (id: number) => {
     const addedChat = await addFriend(id);
+    if (Array.isArray(addedChat)) {
+      return undefined;
+    }
     return addedChat;
   }
 );
@@ -52,7 +55,7 @@ const FriendsSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(addChatThunk.fulfilled, (state, action) => {
-        state.chats.push(action.payload);
+        if (action.payload) state.chats.push(action.payload);
       })
       .addCase(addChatThunk.rejected, (state, action) => {
         state.error = action.error.message;
