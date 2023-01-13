@@ -32,7 +32,10 @@ function ChatPage(): JSX.Element {
   }, [currentChat?.Messages, currentChat?.id]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setFile(event.target.files![0]);
+    if (event.target.files) {
+      const { length } = event.target.files
+      setFile(event.target.files![length - 1]);
+    }
   };
 
   const handlePick = (): void => {
