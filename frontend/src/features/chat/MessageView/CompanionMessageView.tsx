@@ -1,5 +1,6 @@
 import { Card, Typography } from '@mui/material';
 import React, { memo } from 'react';
+import ImageView from '../ImageView/ImageView';
 import Message from '../types/Message';
 
 type MessageViewProps = {
@@ -7,7 +8,6 @@ type MessageViewProps = {
 };
 
 function CompanionMessageView({ message }: MessageViewProps): JSX.Element {
-
   return (
     <Card
       sx={{

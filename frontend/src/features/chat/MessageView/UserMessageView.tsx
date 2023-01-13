@@ -1,14 +1,13 @@
 import { Card, Typography } from '@mui/material';
 import React, { memo } from 'react';
+import ImageView from '../ImageView/ImageView';
 import Message from '../types/Message';
-
 
 type MessageViewProps = {
   message: Message;
 };
 
 function UserMessageView({ message }: MessageViewProps): JSX.Element {
-
   return (
     <Card
       sx={{
