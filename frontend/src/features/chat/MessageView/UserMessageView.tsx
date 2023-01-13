@@ -26,6 +26,7 @@ function UserMessageView({ message }: MessageViewProps): JSX.Element {
       elevation={2}
     >
       <Typography
+        style={{ display: 'inline-block' }}
         align="left"
         gutterBottom
         variant="subtitle2"
@@ -36,6 +37,15 @@ function UserMessageView({ message }: MessageViewProps): JSX.Element {
         }}
       >
         {message.username}
+        <Typography
+          style={{ display: 'inline-block' }}
+          sx={{
+            marginLeft: 1,
+            color: 'darkgray',
+            fontSize: 10,
+          }}>
+          {`${message.createdAt.substring(11, 16)}`}
+        </Typography>
       </Typography>
 
       <Typography
