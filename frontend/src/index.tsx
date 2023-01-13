@@ -7,12 +7,34 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import App from './App/App';
 import store from './store';
 
+
+// адаптов для айфона
+const iPhoneInput = {
+  styleOverrides: {
+    root: {
+      "*": {
+        "-webkit-user-select": "text !important" /* Chrome, Opera, Safari */,
+        "-moz-user-select": "text !important" /* Firefox 2+ */,
+        "-ms-user-select": "text !important" /* IE 10+ */,
+        "user-select": "text !important" /* Standard syntax */,
+      },
+    },
+  },
+};
+
 const mainTheme = createTheme({
+  components: {
+    MuiTextField: iPhoneInput,
+    MuiInput: iPhoneInput,
+    MuiFilledInput: iPhoneInput,
+    MuiOutlinedInput: iPhoneInput,
+  },
   palette: {
     primary: {
       main: '#296EFF',
       light: '#000000',
     },
+    
     secondary: {
       main: '#1E1F25',
     },
