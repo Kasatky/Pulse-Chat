@@ -3,7 +3,7 @@ import User from '../../../auth/types/User';
 
 type UseSocketResult = {
   user: User | undefined;
-  sendMessage: (event: React.FormEvent, file: any) => void;
+  sendMessage: (event: React.FormEvent, file: File|undefined) => void;
   text: string;
   setText: React.Dispatch<React.SetStateAction<string>>;
   socket: Socket;
