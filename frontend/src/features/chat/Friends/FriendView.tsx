@@ -1,8 +1,8 @@
-import { Avatar, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import Chat from "./types/Chat";
+import { Avatar, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import React, { memo, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import Chat from './types/Chat';
 
 type ChatViewProps = { chat: Chat };
 
@@ -12,6 +12,8 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
   const { id } = useParams();
 
   const lastMessage = chat.Messages[chat.Messages.length - 1];
+
+  useEffect(() => {}, [chat.Messages]);
 
   const handleChatChange = (): void => {
     navigate(`/chats/${chat.id}`);
@@ -58,4 +60,4 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
   );
 }
 
-export default ChatView;
+export default memo(ChatView);
