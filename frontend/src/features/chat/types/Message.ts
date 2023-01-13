@@ -4,6 +4,7 @@ type Message = {
   id: number;
   chatId: number;
   imageLink?: string;
+  createdAt: string;
 };
 
 export default Message;

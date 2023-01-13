@@ -3,6 +3,7 @@ import { Box, Button, Container, TextField } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ImageIcon from "@mui/icons-material/Image";
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 // import EmojiPicker from 'emoji-picker-react';
 import './HomePage.css';
 import useSocket from '../Hooks/useSocket';
@@ -35,7 +36,9 @@ function ChatPage(): JSX.Element {
   };
 
   const handlePick = (): void => {
-    filePicker.current!.click();
+    if (file) {
+      setFile(undefined)
+    } else filePicker.current!.click();
   };
 
   return (
@@ -108,6 +111,7 @@ function ChatPage(): JSX.Element {
             <Box>
               <button type="button" onClick={handlePick}>
                 <ImageIcon color="primary" />
+                {file && (<HighlightOffIcon color="primary" />)}
               </button>
               <input
                 className="hidenInput"
