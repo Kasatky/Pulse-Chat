@@ -20,8 +20,10 @@ function ChatPage(): JSX.Element {
   const filePicker = useRef<HTMLInputElement | null>(null);
 
   const handleSubmit = (event: React.FormEvent): void => {
-    sendMessage(event, file);
-    setFile(undefined);
+    if (file || text) {
+      sendMessage(event, file);
+      setFile(undefined);
+    }
   };
 
   useEffect(() => {
