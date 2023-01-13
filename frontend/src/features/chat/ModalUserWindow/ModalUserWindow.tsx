@@ -7,7 +7,8 @@ import { Avatar, TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-import UploadFile from '../UploadFile/UploadFile';
+// import UploadFile from '../UploadFile/UploadFile';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import selectCurrentUser from '../selectors';
 import { logoutThunk } from '../../auth/authSlice';
 import { useAppDispatch } from '../../../store';
@@ -25,7 +26,13 @@ function ModalUserWindow(): JSX.Element {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 500,
+    width: {
+      xs: '80vw',
+      sm: 500,
+      md: 500,
+      lg: 500,
+      xl: 500,
+    },
     bgcolor: '#E0E0E0',
     border: '2px solid #000',
     boxShadow: 24,
@@ -62,9 +69,11 @@ function ModalUserWindow(): JSX.Element {
       <Modal open={open} onClose={handleClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
         <Box sx={style}>
           
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography id='modal-modal-title' variant='h6' component='h2' >
             Edit profile
-            <UploadFile />
+            {/* <UploadFile /> */}
+            <AddAPhotoIcon sx={{ml:'10px'}}/>
+
           </Typography>
 
           <Typography id='modal-modal-description' sx={{ alignItems: 'center', mt: 2, display: 'flex', flexDirection: 'column' }}>

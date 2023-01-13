@@ -9,7 +9,7 @@ function Auth(): JSX.Element {
   const error = useSelector(errorSelector);
   const [viewLogin, setViewLogin] = useState(true);
   return (
-    <Container sx={{ p: 0 }} component='main'>
+    <Container sx={{ p: 0}} component='main'>
       {error && <h1>{error}</h1>}
       {viewLogin ? <LoginView /> : <RegistrationView />}
       <Grid container justifyContent='center'>
