@@ -4,9 +4,9 @@ import React, { memo, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Chat from './types/Chat';
 
-type ChatViewProps = { chat: Chat };
+type ChatViewProps = { chat: Chat; phone: boolean };
 
-function ChatView({ chat }: ChatViewProps): JSX.Element {
+function ChatView({ chat, phone }: ChatViewProps): JSX.Element {
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -18,45 +18,90 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
   const handleChatChange = (): void => {
     navigate(`/chats/${chat.id}`);
   };
-  const currentColor = chat.id === Number(id) ? "white" : "white";
+  const currentColor = chat.id === Number(id) ? 'white' : 'white';
   return (
-    <Box
-      onClick={handleChatChange}
-      sx={{
-        backgroundColor: chat.id === Number(id) ? "#585d6e" : "#212329",
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        cursor: "pointer",
-      }}
-    >
-      {chat && (
-        <>
-          <Avatar
-            src={`/img/${chat?.image}`}
-            alt={chat.name}
-            sx={{
-              margin: 2,
-              cursor: "pointer",
-            }}
-          >
-            {chat.name[0]}
-          </Avatar>
-          <div>
-            <Typography color={currentColor} onClick={handleChatChange}>
-              {chat.name}
-            </Typography>
-            <Typography
-              sx={{ fontSize: 14 }}
-              variant="subtitle1"
-              color={currentColor}
-            >
-              {lastMessage?.text}
-            </Typography>
-          </div>
-        </>
+    <>
+      {phone && (
+        <Box
+          onClick={handleChatChange}
+          sx={{
+            backgroundColor: chat.id === Number(id) ? '#585d6e' : '#212329',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            cursor: 'pointer',
+            borderRadius: 10,
+            mb: 1,
+          }}
+        >
+          {chat && (
+            <>
+              <Avatar
+                src={`/img/${chat?.image}`}
+                alt={chat.name}
+                sx={{
+                  margin: 2,
+                  cursor: 'pointer',
+                }}
+              >
+                {chat.name[0]}
+              </Avatar>
+              <div>
+                <Typography color={currentColor} onClick={handleChatChange}>
+                  {chat.name}
+                </Typography>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  variant="subtitle1"
+                  color={currentColor}
+                >
+                  {lastMessage?.text}
+                </Typography>
+              </div>
+            </>
+          )}
+        </Box>
       )}
-    </Box>
+      {!phone && (
+        <Box
+          onClick={handleChatChange}
+          sx={{
+            backgroundColor: chat.id === Number(id) ? '#585d6e' : '#212329',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            cursor: 'pointer',
+          }}
+        >
+          {chat && (
+            <>
+              <Avatar
+                src={`/img/${chat?.image}`}
+                alt={chat.name}
+                sx={{
+                  margin: 2,
+                  cursor: 'pointer',
+                }}
+              >
+                {chat.name[0]}
+              </Avatar>
+              <div>
+                <Typography color={currentColor} onClick={handleChatChange}>
+                  {chat.name}
+                </Typography>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  variant="subtitle1"
+                  color={currentColor}
+                >
+                  {lastMessage?.text}
+                </Typography>
+              </div>
+            </>
+          )}
+        </Box>
+      )}
+    </>
   );
 }
 
