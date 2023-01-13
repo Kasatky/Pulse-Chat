@@ -61,15 +61,11 @@ function ModalUserWindow({ phone }: ModalUserWindowProps): JSX.Element {
     setNewNick(event.target.value);
   };
 
-  // const handleSubmit = (event: React.FormEvent): void => {
-  //   event.preventDefault();
-  //   // дописать
-  // };
   return (
     <>
       {phone && (
         <>
-          <SettingsIcon onClick={handleOpen} />
+          <SettingsIcon sx={{ mr: 1 }} onClick={handleOpen} />
           <Modal
             open={open}
             onClose={handleClose}
@@ -164,9 +160,9 @@ function ModalUserWindow({ phone }: ModalUserWindowProps): JSX.Element {
         </>
       )}
       {!phone && (
-        <div>
-          <Button sx={{ color: 'black' }} onClick={handleOpen}>
-            <SettingsIcon />
+        <>
+          <Button onClick={handleOpen}>
+            <SettingsIcon sx={{ color: 'white' }} />
           </Button>
           <Modal
             open={open}
@@ -258,7 +254,7 @@ function ModalUserWindow({ phone }: ModalUserWindowProps): JSX.Element {
               </Box>
             </Box>
           </Modal>
-        </div>
+        </>
       )}
     </>
   );

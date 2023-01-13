@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import SearchIcon from '@mui/icons-material/Search';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
 import { useAppDispatch } from '../../../store';
@@ -76,8 +76,14 @@ export default function UserSearch({ phone }: UserSearchProps): JSX.Element {
     setOpen(false);
     // dispatch(resetSearch());
   };
-
   const results = useSelector(foundUsersSelector);
+
+  useEffect(() => {
+    if (phone) {
+      handleOpen();
+      dispatch(searchUsersThunk(text));
+    }
+  }, []);
 
   const handleSearch = (event: React.FormEvent): void => {
     event.preventDefault();
@@ -89,7 +95,7 @@ export default function UserSearch({ phone }: UserSearchProps): JSX.Element {
     <>
       {phone && (
         <>
-          <SearchIcon onClick={handleOpen} />
+          <SearchIcon sx={{ mr: 1 }} onClick={handleOpen} />
           <Dialog
             PaperProps={{
               style: { borderRadius: 20, width: 600 },
@@ -176,7 +182,11 @@ export default function UserSearch({ phone }: UserSearchProps): JSX.Element {
                     >
                       {results &&
                         results.map((user) => (
-                          <FoundUserView key={user.id} user={user} />
+                          <FoundUserView
+                            phone={phone}
+                            key={user.id}
+                            user={user}
+                          />
                         ))}
                     </Grid>
                   </Grid>
@@ -292,7 +302,11 @@ export default function UserSearch({ phone }: UserSearchProps): JSX.Element {
                     >
                       {results &&
                         results.map((user) => (
-                          <FoundUserView key={user.id} user={user} />
+                          <FoundUserView
+                            phone={phone}
+                            key={user.id}
+                            user={user}
+                          />
                         ))}
                     </Grid>
                   </Grid>

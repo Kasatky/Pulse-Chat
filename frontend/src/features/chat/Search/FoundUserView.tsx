@@ -8,9 +8,10 @@ import { addChatThunk } from '../Friends/FriendsSlice';
 
 type FoundUserViewProps = {
   user: User;
+  phone: boolean;
 };
 
-function FoundUserView({ user }: FoundUserViewProps): JSX.Element {
+function FoundUserView({ user, phone }: FoundUserViewProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [added, setAdded] = useState(false);
@@ -36,8 +37,8 @@ function FoundUserView({ user }: FoundUserViewProps): JSX.Element {
       {user?.image ? (
         <Box
           sx={{
-            height: 40,
-            width: 40,
+            width: 80,
+            height: 80,
             borderRadius: '50%',
             backgroundImage: `url(/img/${user?.image})`,
             backgroundSize: '100%',
@@ -49,27 +50,43 @@ function FoundUserView({ user }: FoundUserViewProps): JSX.Element {
       ) : (
         <Avatar
           sx={{
-            height: 40,
-            width: 40,
+            width: 80,
+            height: 80,
           }}
         >
           {user.name[0]}
         </Avatar>
       )}
+      {phone ? (
+        <Typography
+          align="left"
+          variant="h4"
+          sx={{
+            color: 'white',
+            ml: 1,
+            mr: 'auto',
+            fontSize: 16,
+            wordBreak: 'break-all',
+          }}
+        >
+          {user.name}
+        </Typography>
+      ) : (
+        <Typography
+          align="left"
+          variant="h4"
+          sx={{
+            color: 'white',
+            ml: 1,
+            mr: 'auto',
+            fontSize: 20,
+            wordBreak: 'break-all',
+          }}
+        >
+          {user.name}
+        </Typography>
+      )}
 
-      <Typography
-        align="left"
-        variant="h1"
-        sx={{
-          ml: 1,
-          mr: 'auto',
-          color: 'primary.light',
-          fontSize: 18,
-          wordBreak: 'break-all',
-        }}
-      >
-        {user.name}
-      </Typography>
       <IconButton onClick={handleIconClick} color="secondary">
         {added ? <CheckRoundedIcon /> : <MapsUgcRoundedIcon />}
       </IconButton>

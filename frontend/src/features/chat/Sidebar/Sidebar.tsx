@@ -7,12 +7,12 @@ import { useTheme } from '@mui/material/styles';
 import logo from './chat.png';
 
 // import SearchView from './SearchView';
+import UserSearch from '../Search/UserSearch';
 
 import allChatsSelector from '../Friends/selectors';
 import ChatView from '../Friends/FriendView';
 import ModalUserWindow from '../ModalUserWindow/ModalUserWindow';
 // import GroupAndDirect from './GroupAndDirect';
-import UserSearch from '../Search/UserSearch';
 import PhoneChatsModal from './PhoneChatsModal';
 
 function Sidebar(): JSX.Element {
@@ -80,7 +80,7 @@ function Sidebar(): JSX.Element {
           Pulse
           {phoneView && (
             <Box sx={{ display: 'inline', ml: 5, mb: 4 }}>
-              {phoneView && <UserSearch phone={phoneView} />}
+              <UserSearch phone={phoneView} />
               <ModalUserWindow phone={phoneView} />
               <PhoneChatsModal />
             </Box>
@@ -117,9 +117,11 @@ function Sidebar(): JSX.Element {
               flex: 1,
             }}
           >
-            <Typography variant="h5" align="left" sx={{ ml: '1vw', mb: '3vh' }}>
-              Your messages
-            </Typography>
+            <Typography
+              variant="h5"
+              align="left"
+              sx={{ ml: '1vw', mb: '3vh' }}
+            />
 
             <Box
               sx={{
