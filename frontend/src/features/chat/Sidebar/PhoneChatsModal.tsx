@@ -60,9 +60,7 @@ export default function PhoneChatsModal(): JSX.Element {
                 variant="h5"
                 align="left"
                 sx={{ ml: '1vw', mb: '3vh' }}
-              >
-                Your messages
-              </Typography>
+              />
 
               <Box
                 sx={{

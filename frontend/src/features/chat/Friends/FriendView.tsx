@@ -40,6 +40,8 @@ function ChatView({ chat, phone }: ChatViewProps): JSX.Element {
                 src={`/img/${chat?.image}`}
                 alt={chat.name}
                 sx={{
+                  width: 60,
+                  height: 60,
                   margin: 2,
                   cursor: 'pointer',
                 }}
@@ -79,6 +81,8 @@ function ChatView({ chat, phone }: ChatViewProps): JSX.Element {
                 src={`/img/${chat?.image}`}
                 alt={chat.name}
                 sx={{
+                  width: 60,
+                  height: 60,
                   margin: 2,
                   cursor: 'pointer',
                 }}
