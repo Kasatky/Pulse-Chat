@@ -43,10 +43,7 @@ function ModalUserWindow({ phone }: ModalUserWindowProps): JSX.Element {
     // height: 600,
     borderRadius: 10,
     display: 'flex',
-    display: 'flex',
     // justifyContent: "flex-start",
-    alignItems: 'center',
-    flexDirection: 'column',
     alignItems: 'center',
     flexDirection: 'column',
     marginBottom: 5,
@@ -80,7 +77,12 @@ function ModalUserWindow({ phone }: ModalUserWindowProps): JSX.Element {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                sx={{ display: 'flex', flexDirection: 'column' }}
+              >
                 Edit profile
                 <UploadFile />
               </Typography>
@@ -128,8 +130,9 @@ function ModalUserWindow({ phone }: ModalUserWindowProps): JSX.Element {
                 <Box
                   sx={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
+                    flexDirection: 'row',
+                    alignSelf: 'stretch',
+                    justifyContent: 'space-between',
                   }}
                 >
                   <Button
@@ -144,11 +147,11 @@ function ModalUserWindow({ phone }: ModalUserWindowProps): JSX.Element {
                     sx={{
                       // width: '100%',
                       // height: '3vh',
-                      marginTop: 5,
+                      color: 'black',
                     }}
                     disableElevation
                     onClick={handleLogout}
-                    variant="contained"
+                    variant="text"
                   >
                     <LogoutIcon />
                   </Button>
