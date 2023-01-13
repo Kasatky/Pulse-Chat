@@ -32,7 +32,7 @@ export default function UploadFile(): JSX.Element {
       {/* <button className="inputBTNS" type="button" onClick={handlePick}> </button> */}
       <button type="button" onClick={handlePick} style={{border:'none', backgroundColor:"#e0e0e0"}}>
         {" "}
-        <AddAPhotoIcon sx={{ ml: "10px" }} />
+        <AddAPhotoIcon  />
       </button>
       <input
         className="hidenInput"
