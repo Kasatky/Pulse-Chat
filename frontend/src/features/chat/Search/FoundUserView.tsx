@@ -23,7 +23,7 @@ function FoundUserView({ user }: FoundUserViewProps): JSX.Element {
   return (
     <Box
       sx={{
-        backgroundColor: 'warning.main',
+        backgroundColor: 'primary.main',
         width: 0.9,
         height: '30',
         p: 1,
@@ -47,10 +47,14 @@ function FoundUserView({ user }: FoundUserViewProps): JSX.Element {
           }}
         />
       ) : (
-        <Avatar sx={{
-          height: 40,
-          width: 40,
-        }}>{user.name[0]}</Avatar>
+        <Avatar
+          sx={{
+            height: 40,
+            width: 40,
+          }}
+        >
+          {user.name[0]}
+        </Avatar>
       )}
 
       <Typography
@@ -59,7 +63,7 @@ function FoundUserView({ user }: FoundUserViewProps): JSX.Element {
         sx={{
           ml: 1,
           mr: 'auto',
-          color: 'primary.main',
+          color: 'primary.light',
           fontSize: 18,
           wordBreak: 'break-all',
         }}

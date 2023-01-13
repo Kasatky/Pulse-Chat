@@ -59,7 +59,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-export default function UserSearch(): JSX.Element {
+
+type UserSearchProps = {
+  phone: boolean;
+};
+
+export default function UserSearch({ phone }: UserSearchProps): JSX.Element {
   const [open, setOpen] = React.useState(false);
   const [text, setText] = React.useState('');
 
@@ -82,117 +87,224 @@ export default function UserSearch(): JSX.Element {
 
   return (
     <>
-      <form onSubmit={handleSearch}>
-        <Search sx={{ mb: 1 }} onSubmit={handleOpen}>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            value={text}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setText(event.target.value);
+      {phone && (
+        <>
+          <SearchIcon onClick={handleOpen} />
+          <Dialog
+            PaperProps={{
+              style: { borderRadius: 20, width: 600 },
             }}
-            placeholder="Search…"
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </Search>
-      </form>
-      <Dialog
-        PaperProps={{
-          style: { borderRadius: 20, width: 600 },
-        }}
-        open={open}
-        fullWidth
-        maxWidth="xl"
-        onClose={handleClose}
-      >
-        <DialogContent
-          sx={{
-            height: '70vh',
-            display: 'flex',
-            // borderRadius: '30',
-            alignContent: 'center',
-            '&::-webkit-scrollbar': {
-              display: 'none',
-              
-            },
-          }}
-        >
-          <DialogContentText sx={{ width: 1 }}>
-            <form onSubmit={handleSearch}>
-              <Grid
-                container
-                spacing={2}
-                sx={{ mt: 1, ml: 'auto', mr: 'auto' }}
-              >
-                <TextField
-                  autoComplete="false"
-                  sx={{
-                    margin: 1,
-                    width: 1,
-                    '& .Mui-focused .MuiIconButton-root': {
-                      color: 'primary.main',
-                    },
-                  }}
-                  fullWidth
-                  size="small"
-                  value={text}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setText(event.target.value);
-                  }}
-                  name="text"
-                  variant="outlined"
-                  InputProps={{
-                    startAdornment: (
-                      <IconButton
-                        sx={{
-                          ml: -1.5,
-                          '&:hover': {
-                            backgroundColor: '#FFF',
-                          },
-                        }}
-                        type="button"
-                        onClick={handleSearch}
-                        aria-label="search"
-                      >
-                        <SearchIcon />
-                      </IconButton>
-                    ),
-                    endAdornment: (
-                      <IconButton
-                        sx={{ visibility: text ? 'visible' : 'hidden' }}
-                        onClick={() => setText('')}
-                      >
-                        <ClearIcon />
-                      </IconButton>
-                    ),
-                  }}
-                />
+            open={open}
+            fullWidth
+            maxWidth="xl"
+            onClose={handleClose}
+          >
+            <DialogContent
+              sx={{
+                height: '70vh',
+                display: 'flex',
+                // borderRadius: '30',
+                alignContent: 'center',
+                '&::-webkit-scrollbar': {
+                  display: 'none',
+                },
+              }}
+            >
+              <DialogContentText sx={{ width: 1 }}>
+                <form onSubmit={handleSearch}>
+                  <Grid
+                    container
+                    spacing={2}
+                    sx={{ mt: 1, ml: 'auto', mr: 'auto' }}
+                  >
+                    <TextField
+                      autoComplete="false"
+                      sx={{
+                        margin: 1,
+                        width: 1,
+                        '& .Mui-focused .MuiIconButton-root': {
+                          color: 'primary.main',
+                        },
+                      }}
+                      fullWidth
+                      size="small"
+                      value={text}
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => {
+                        setText(event.target.value);
+                      }}
+                      name="text"
+                      variant="outlined"
+                      InputProps={{
+                        startAdornment: (
+                          <IconButton
+                            sx={{
+                              ml: -1.5,
+                              '&:hover': {
+                                backgroundColor: '#FFF',
+                              },
+                            }}
+                            type="button"
+                            onClick={handleSearch}
+                            aria-label="search"
+                          >
+                            <SearchIcon />
+                          </IconButton>
+                        ),
+                        endAdornment: (
+                          <IconButton
+                            sx={{ visibility: text ? 'visible' : 'hidden' }}
+                            onClick={() => setText('')}
+                          >
+                            <ClearIcon />
+                          </IconButton>
+                        ),
+                      }}
+                    />
 
-                <Grid
-                  container
-                  spacing={2}
-                  item
-                  sx={{
-                    mt: 1,
-                    display: 'flex',
-                    justifyContent: 'center',
-                  }}
-                  xs={12}
-                >
-                  {results &&
-                    results.map((user) => (
-                      <FoundUserView key={user.id} user={user} />
-                    ))}
-                </Grid>
-              </Grid>
-            </form>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
-      </Dialog>
+                    <Grid
+                      container
+                      spacing={2}
+                      item
+                      sx={{
+                        mt: 1,
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                      xs={12}
+                    >
+                      {results &&
+                        results.map((user) => (
+                          <FoundUserView key={user.id} user={user} />
+                        ))}
+                    </Grid>
+                  </Grid>
+                </form>
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Close</Button>
+            </DialogActions>
+          </Dialog>
+        </>
+      )}
+      {!phone && (
+        <>
+          <form onSubmit={handleSearch}>
+            <Search sx={{ mb: 1 }} onSubmit={handleOpen}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                value={text}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setText(event.target.value);
+                }}
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
+          </form>
+          <Dialog
+            PaperProps={{
+              style: { borderRadius: 20, width: 600 },
+            }}
+            open={open}
+            fullWidth
+            maxWidth="xl"
+            onClose={handleClose}
+          >
+            <DialogContent
+              sx={{
+                height: '70vh',
+                display: 'flex',
+                // borderRadius: '30',
+                alignContent: 'center',
+                '&::-webkit-scrollbar': {
+                  display: 'none',
+                },
+              }}
+            >
+              <DialogContentText sx={{ width: 1 }}>
+                <form onSubmit={handleSearch}>
+                  <Grid
+                    container
+                    spacing={2}
+                    sx={{ mt: 1, ml: 'auto', mr: 'auto' }}
+                  >
+                    <TextField
+                      autoComplete="false"
+                      sx={{
+                        margin: 1,
+                        width: 1,
+                        '& .Mui-focused .MuiIconButton-root': {
+                          color: 'primary.main',
+                        },
+                      }}
+                      fullWidth
+                      size="small"
+                      value={text}
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => {
+                        setText(event.target.value);
+                      }}
+                      name="text"
+                      variant="outlined"
+                      InputProps={{
+                        startAdornment: (
+                          <IconButton
+                            sx={{
+                              ml: -1.5,
+                              '&:hover': {
+                                backgroundColor: '#FFF',
+                              },
+                            }}
+                            type="button"
+                            onClick={handleSearch}
+                            aria-label="search"
+                          >
+                            <SearchIcon />
+                          </IconButton>
+                        ),
+                        endAdornment: (
+                          <IconButton
+                            sx={{ visibility: text ? 'visible' : 'hidden' }}
+                            onClick={() => setText('')}
+                          >
+                            <ClearIcon />
+                          </IconButton>
+                        ),
+                      }}
+                    />
+
+                    <Grid
+                      container
+                      spacing={2}
+                      item
+                      sx={{
+                        mt: 1,
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                      xs={12}
+                    >
+                      {results &&
+                        results.map((user) => (
+                          <FoundUserView key={user.id} user={user} />
+                        ))}
+                    </Grid>
+                  </Grid>
+                </form>
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Close</Button>
+            </DialogActions>
+          </Dialog>
+        </>
+      )}
     </>
   );
 }
