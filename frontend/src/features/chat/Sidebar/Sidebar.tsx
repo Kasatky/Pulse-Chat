@@ -50,7 +50,7 @@ function Sidebar(): JSX.Element {
             width: 70,
             margin: 'auto'
         }}>
-          <img  src={logo} alt="logo" width={45} />
+          <img  src={logo} alt="logo" width={45} style={{filter: "brightness(1.75)"}} />
           </Box>
         <Typography
           variant='h3'

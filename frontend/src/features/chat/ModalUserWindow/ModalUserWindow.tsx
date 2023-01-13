@@ -8,8 +8,7 @@ import { Avatar, TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-// import UploadFile from '../UploadFile/UploadFile';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import UploadFile from '../UploadFile/UploadFile';
 import selectCurrentUser from '../selectors';
 import { logoutThunk } from '../../auth/authSlice';
 import { useAppDispatch } from '../../../store';
@@ -82,8 +81,7 @@ function ModalUserWindow(): JSX.Element {
           <Typography id='modal-modal-title' variant='h6' component='h2' >
 
             Edit profile
-            {/* <UploadFile /> */}
-            <AddAPhotoIcon sx={{ml:'10px'}}/>
+            <UploadFile />
 
           </Typography>
 
