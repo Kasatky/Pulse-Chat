@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import sound from './beep.wav';
 import Message from '../types/Message';
 import addFriend, { loadFriends as loadChats } from './api';
 import Chat from './types/Chat';
@@ -47,9 +48,14 @@ const FriendsSlice = createSlice({
       const chatOfRecievedMessage = state.chats.find(
         (chat) => chat.id === action.payload.chatId
       );
+
       if (chatOfRecievedMessage) {
         const oldIndexOfChat = state.chats.indexOf(chatOfRecievedMessage);
 
+        const recieveSound = new Audio(sound);
+        if (action.payload.username === chatOfRecievedMessage.name) {
+          recieveSound.play();
+        }
         arrayMove(state.chats, oldIndexOfChat, 0);
 
         chatOfRecievedMessage.Messages.push(action.payload);

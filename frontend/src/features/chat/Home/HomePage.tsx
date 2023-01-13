@@ -3,11 +3,10 @@ import { Box, Button, Container, TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // import EmojiPicker from 'emoji-picker-react';
-import CompanionMessageView from '../MessageView/CompanionMessageView';
 import './HomePage.css';
-import UserMessageView from '../MessageView/UserMessageView';
 import useSocket from '../Hooks/useSocket';
 import allChatsSelector from '../Friends/selectors';
+import ChatBox from './ChatBox';
 
 function ChatPage(): JSX.Element {
   const { id: chatId } = useParams();
@@ -50,47 +49,7 @@ function ChatPage(): JSX.Element {
         }}
         onSubmit={sendMessage}
       >
-        <Box
-          id={`chatBox${currentChat?.id}`}
-          className="messages"
-          sx={{
-            position: 'relative',
-            padding: {
-              xs: '10px',
-              sm: '40px',
-              md: '40px',
-              lg: '40px',
-              xl: '40px',
-            },
-            height: {
-              xs: '80vh',
-              sm: 'none',
-              md: 'none',
-              lg: 'none',
-              xl: 'none',
-            },
-
-            // display:'flex',
-            flex: '1 0 auto',
-            width: '100%',
-            overflowY: 'auto',
-            justifyContent: 'flex-end',
-            flexDirection: 'column',
-            '&::-webkit-scrollbar': {
-              display: 'none',
-            },
-          }}
-        >
-          {currentChat &&
-            currentChat.Messages.map((message) =>
-              user?.name === message.username ? (
-                <UserMessageView key={message.id} message={message} />
-              ) : (
-                <CompanionMessageView key={message.id} message={message} />
-              )
-            )}
-        </Box>
-
+        <ChatBox currentChat={currentChat} user={user} />
         <Box
           sx={{
             padding: '10px 30px',
