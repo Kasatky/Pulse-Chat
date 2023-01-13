@@ -54,7 +54,7 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
             >
               {chat.Messages.length < 1 ? (
                 "No messages yet..."
-              ) : (lastMessage.imageLink ? (<PhotoSizeSelectActualIcon />) :
+              ) : (lastMessage.imageLink ? (<PhotoSizeSelectActualIcon sx={{ fontSize: 15 }} />) :
                 (lastMessage?.text))}
             </Typography>
           </div>
