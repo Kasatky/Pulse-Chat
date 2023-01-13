@@ -86,6 +86,7 @@ function Sidebar(): JSX.Element {
             </Box>
           )}
         </Typography>
+        {!phoneView && <ModalUserWindow phone={phoneView} />}
       </Box>
       <Box
         sx={{

@@ -173,7 +173,12 @@ function ModalUserWindow({ phone }: ModalUserWindowProps): JSX.Element {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                sx={{ display: 'flex', flexDirection: 'column' }}
+              >
                 Edit profile
                 <UploadFile />
               </Typography>
@@ -217,36 +222,36 @@ function ModalUserWindow({ phone }: ModalUserWindowProps): JSX.Element {
                   onChange={handleNicknameChange}
                 />
                 {/* <TextField fullWidth label='Bio' id='fullWidth' /> */}
-
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Button
-                    type="submit"
-                    sx={{ marginTop: 5, marginBottom: 5, width: '40%' }}
-                    variant="contained"
-                    onClick={handleClose}
-                  >
-                    Save
-                  </Button>
-                  <Button
-                    sx={{
-                      // width: '100%',
-                      // height: '3vh',
-                      marginTop: 5,
-                    }}
-                    disableElevation
-                    onClick={handleLogout}
-                    variant="contained"
-                  >
-                    <LogoutIcon />
-                  </Button>
-                </Box>
               </Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignSelf: 'stretch',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <Button
+                  type="submit"
+                  sx={{ marginTop: 5, marginBottom: 5, width: '40%' }}
+                  variant="contained"
+                  onClick={handleClose}
+                >
+                  Save
+                </Button>
+                <Button
+                  sx={{
+                    color: 'black',
+                    // width: '100%',
+                    // height: '3vh',
+                  }}
+                  disableElevation
+                  onClick={handleLogout}
+                  variant="text"
+                >
+                  <LogoutIcon />
+                </Button>
+              </Box>
             </Box>
           </Modal>
         </div>
