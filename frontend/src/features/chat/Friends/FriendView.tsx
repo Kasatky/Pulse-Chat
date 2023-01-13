@@ -1,4 +1,5 @@
 import { Avatar, Typography } from '@mui/material';
+import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
 import { Box } from '@mui/system';
 import React, { memo, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -13,7 +14,7 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
 
   const lastMessage = chat.Messages[chat.Messages.length - 1];
 
-  useEffect(() => {}, [chat.Messages]);
+  useEffect(() => { }, [chat.Messages]);
 
   const handleChatChange = (): void => {
     navigate(`/chats/${chat.id}`);
@@ -51,7 +52,10 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
               variant="subtitle1"
               color={currentColor}
             >
-              {lastMessage?.text}
+              {chat.Messages.length < 1 ? (
+                "No messages yet..."
+              ) : (lastMessage.imageLink ? (<PhotoSizeSelectActualIcon />) :
+                (lastMessage?.text))}
             </Typography>
           </div>
         </>
