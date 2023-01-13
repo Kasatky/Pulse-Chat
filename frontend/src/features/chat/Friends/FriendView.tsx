@@ -18,16 +18,16 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
   const handleChatChange = (): void => {
     navigate(`/chats/${chat.id}`);
   };
-  const currentColor = chat.id === Number(id) ? 'white' : 'white';
+  const currentColor = chat.id === Number(id) ? "white" : "white";
   return (
     <Box
       onClick={handleChatChange}
       sx={{
-        backgroundColor: chat.id === Number(id) ? '#585d6e' : '#212329',
-        display: 'flex',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        cursor: 'pointer',
+        backgroundColor: chat.id === Number(id) ? "#585d6e" : "#212329",
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        cursor: "pointer",
       }}
     >
       {chat && (
@@ -37,7 +37,7 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
             alt={chat.name}
             sx={{
               margin: 2,
-              cursor: 'pointer',
+              cursor: "pointer",
             }}
           >
             {chat.name[0]}
@@ -51,7 +51,7 @@ function ChatView({ chat }: ChatViewProps): JSX.Element {
               variant="subtitle1"
               color={currentColor}
             >
-              {lastMessage.text}
+              {lastMessage?.text}
             </Typography>
           </div>
         </>

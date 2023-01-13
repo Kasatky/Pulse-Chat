@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Message.init({
     username: {type: DataTypes.TEXT, allowNull:false, defaultValue:"Sonya"},
-    text: {type: DataTypes.TEXT, allowNull:false}
+    text: {type: DataTypes.TEXT, allowNull:false},
+    imageLink: {type: DataTypes.TEXT}
   }, {
     sequelize,
     modelName: 'Message',

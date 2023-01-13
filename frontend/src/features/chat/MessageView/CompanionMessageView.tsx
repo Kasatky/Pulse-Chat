@@ -7,6 +7,7 @@ type MessageViewProps = {
 };
 
 function CompanionMessageView({ message }: MessageViewProps): JSX.Element {
+
   return (
     <Card
       sx={{
@@ -49,6 +50,7 @@ function CompanionMessageView({ message }: MessageViewProps): JSX.Element {
       >
         {message.text}
       </Typography>
+      {message.imageLink && <ImageView msgImg={message.imageLink} />}
     </Card>
   );
 }

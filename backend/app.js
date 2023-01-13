@@ -51,7 +51,7 @@ const ioSocket = new io.Server(server, {
 expressConfig(app, ioSocket);
 
 app.use("/api/auth", authRouter);
-app.use("/api/uploadFile", uploadRouter);
+app.use("/api/upload", uploadRouter);
 
 app.use("/api/search", searchRouter);
 
@@ -70,13 +70,14 @@ ioSocket.on("connection", async (socket) => {
     app.locals.io = ioSocket;
 
     socket.on("/messages/send", async (data) => {
-      const { text, chatId } = JSON.parse(data);
+      const { text, chatId, imageLink } = JSON.parse(data);
 
       if (chatId) {
         const message = await Message.create({
           text,
           username: socket.user.name,
           chatId,
+          imageLink,
         });
         console.log(`Message: ${text} sended to chat${chatId}`);
         ioSocket.sockets.emit("/messages/recieve", message);
